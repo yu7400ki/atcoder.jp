@@ -1,7 +1,10 @@
+from functools import lru_cache
+
 def main():
     n = int(input())
     A = list(map(int,input().split()))
 
+    @lru_cache(maxsize=1000)
     def gcd(a,b):
         R = a % b
         if R == 0:
