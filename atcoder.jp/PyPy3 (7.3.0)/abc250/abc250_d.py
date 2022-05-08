@@ -12,7 +12,7 @@ while True:
 	else:
 		primes.append(num)
 	num += 2
-	if num >= 800000:
+	if num >= pow(10**18,1/3)//2:
 		break
 
 cnt = 0
