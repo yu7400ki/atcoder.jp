@@ -1,11 +1,12 @@
 n,q = map(int,input().split())
 ball = list(range(1,n+1))
+index = list(range(n))
 for i in range(q):
 	x = int(input())
-	index = ball.index(x)
-	if index == n-1:
-		ball[-2], ball[-1] = ball[-1], ball[-2]
-	else:
-		ball[index], ball[index + 1] = ball[index + 1], ball[index]
+	p = index[x-1]
+	if p == n-1:
+		p -= 1
+	index[ball[p]-1], index[ball[p+1]-1] = index[ball[p+1]-1], index[ball[p]-1]
+	ball[p], ball[p + 1] = ball[p + 1], ball[p]
 
 print(*ball)
