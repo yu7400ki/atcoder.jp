@@ -4,14 +4,17 @@ num = 5
 primes = [2, 3]
 while True:
 	for i in primes:
+		if i**2 > num:
+			primes.append(num)
+			break
 		if num % i == 0:
 			break
 	else:
 		primes.append(num)
 	num += 2
-	if num >= 31650:
+	if num >= 800000:
 		break
-	
+
 cnt = 0
 for i in range(len(primes)):
 	for j in range(i+1,len(primes)):
