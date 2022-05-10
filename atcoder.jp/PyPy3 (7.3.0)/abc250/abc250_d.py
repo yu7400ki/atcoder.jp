@@ -2,18 +2,15 @@ n = int(input())
 
 num = 5
 primes = [2, 3]
-while True:
-	for i in primes:
-		if i**2 > num:
-			primes.append(num)
+for i in range(5,10**6,2):
+	for j in primes:
+		if j**2 > i:
+			primes.append(i)
 			break
-		if num % i == 0:
+		if i % j == 0:
 			break
 	else:
-		primes.append(num)
-	num += 2
-	if num >= pow(10**18,1/3):
-		break
+		primes.append(i)
 
 cnt = 0
 for i in range(len(primes)):
@@ -22,4 +19,5 @@ for i in range(len(primes)):
 			cnt += 1
 		else:
 			break
+
 print(cnt)
