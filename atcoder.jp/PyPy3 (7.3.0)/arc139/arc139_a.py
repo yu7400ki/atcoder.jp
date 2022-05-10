@@ -1,6 +1,6 @@
 n = int(input())
 t = list(map(int,input().split()))
-A = [-1]
+A = [-100]
 
 def ctz(x):
 	res = 0
@@ -13,11 +13,18 @@ def ctz(x):
 
 for i in range(n):
 	a = max(2**(t[i]), A[-1]+1)
+	flag = 1
 	while True:
 		if ctz(a) == t[i]:
 			A.append(a)
 			break
 		else:
-			a += 1
+			if flag:
+				a = 2**(t[i])
+				while a <= A[-1]+1:
+					a += 2**(t[i])
+				flag = 0
+			else:
+				a += 2**(t[i])
 
 print(A[-1])
