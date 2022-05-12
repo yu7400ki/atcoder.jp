@@ -11,12 +11,18 @@ for i in range(5, int(pow(n,1/3))+1, 2):
 	else:
 		primes.append(i)
 
+primes = [0] + primes + [0]
+
 cnt = 0
-for i in range(len(primes)):
-	for j in range(i + 1, len(primes)):
-		if primes[j]**3 * primes[i] <= n:
-			cnt += 1
+for i in range(1,len(primes)-1):
+	ok = i
+	ng = len(primes) - 1
+	while ng - ok > 1:
+		mid = (ok + ng) // 2
+		if primes[mid] ** 3 * primes[i] <= n:
+			ok = mid
 		else:
-			break
+			ng = mid
+	cnt += ok - i
 
 print(cnt)
