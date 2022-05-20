@@ -11,7 +11,7 @@ for s,(x,y) in zip(S,XY):
     if s == 'L':
         L_max[y] = max(L_max[y], x)
     else:
-        R_min[y] = min(R_min[y], y)
+        R_min[y] = min(R_min[y], x)
 
 for y in L_max:
     if R_min[y] < L_max[y]:
