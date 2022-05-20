@@ -1,7 +1,7 @@
 N, X = map(int,input().split())
 S = list(input())
 
-T = [1]
+T = ['x']
 for s in S:
     if s == 'U' and T[-1] in 'LR':
         T.pop()
