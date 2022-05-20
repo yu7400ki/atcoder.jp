@@ -1,15 +1,14 @@
 N, X = map(int,input().split())
 S = list(input())
 
-cnt = 0
-for i in range(N):
-    if S[i-cnt] == 'U':
-        if S[i-1-cnt] == 'L' or S[i-1-cnt] == 'R':
-            del S[i-cnt]
-            del S[i-1-cnt]
-            cnt += 2
-
+T = [1]
 for s in S:
+    if s == 'U' and T[-1] in 'LR':
+        T.pop()
+    else:
+        T.append(s)
+
+for s in T[1:]:
     if s == 'U':
         X //= 2
     elif s == 'L':
