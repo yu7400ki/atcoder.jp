@@ -5,7 +5,7 @@ B = list(map(int,input().split()))
 a = max(A)
 for i in range(len(A)):
 	if A[i] == a:
-		if i in B:
+		if i+1 in B:
 			print('Yes')
 			break
 else:
