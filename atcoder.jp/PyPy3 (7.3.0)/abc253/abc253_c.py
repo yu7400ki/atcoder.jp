@@ -29,4 +29,6 @@ for i in range(Q):
 			else:
 				del S_count[query[1]]
 	else:
+		if len(S_count) == 1:
+				max_x = min_x = max(S_count)
 		print(max_x - min_x)
