@@ -26,6 +26,8 @@ for i in range(Q):
 				else:
 					max_x = max(S_count)
 	else:
-		if len(S_count) == 1:
-				max_x = min_x = max(S_count)
+		if max_x == -float('INF'):
+			max_x = max(S_count)
+		if min_x == float('INF'):
+			min_x = min(S_count)
 		print(max_x - min_x)
