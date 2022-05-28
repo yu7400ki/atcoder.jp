@@ -16,10 +16,16 @@ for i in range(Q):
 		if S_count[query[1]] == 0:
 			if query[1] == min_x:
 				del S_count[query[1]]
-				min_x = min(S_count)
+				if len(S_count) == 0:
+					min_x = float('INF')
+				else:
+					min_x = min(S_count)
 			elif query[1] == max_x:
 				del S_count[query[1]]
-				max_x = max(S_count)
+				if len(S_count) == 0:
+					max_x = -float('INF')
+				else:
+					max_x = max(S_count)
 			else:
 				del S_count[query[1]]
 	else:
