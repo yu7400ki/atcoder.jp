@@ -14,20 +14,17 @@ for i in range(Q):
 	elif query[0] == 2:
 		S_count[query[1]] -= min(query[2], S_count[query[1]])
 		if S_count[query[1]] == 0:
+			del S_count[query[1]]
 			if query[1] == min_x:
-				del S_count[query[1]]
 				if len(S_count) == 0:
 					min_x = float('INF')
 				else:
 					min_x = min(S_count)
 			elif query[1] == max_x:
-				del S_count[query[1]]
 				if len(S_count) == 0:
 					max_x = -float('INF')
 				else:
 					max_x = max(S_count)
-			else:
-				del S_count[query[1]]
 	else:
 		if len(S_count) == 1:
 				max_x = min_x = max(S_count)
