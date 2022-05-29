@@ -25,7 +25,9 @@ def main(c):
 		ans = str(c_1) * l
 
 	if int(ans) > int(c):
-		ans = ans[:l-1]
+		ans = ans[:l]
+		if int(ans) > int(c):
+			ans = ans[:-1]
 	return ans
 
 T = int(input())
