@@ -14,7 +14,7 @@ def main(c):
 		c_2 = int(c[l//d:l//d*2])
 		if c_1 > c_2:
 			c_1 -= 1
-		ans = str(c_1) * d
+		ans = str(c_1) * (d+1)
 	else:
 		c_1 = int(c[0])
 		c_2 = int(c[1])
@@ -22,10 +22,10 @@ def main(c):
 			c_1 -= 1
 		if c_1 == 0:
 			c_1 = 9
-		ans = str(c_1) * (l//d)
+		ans = str(c_1) * l
 
-	if len(ans) > l:
-		ans = ans[1:]
+	if int(ans) > int(c):
+		ans = ans[:l-1]
 	return ans
 
 T = int(input())
