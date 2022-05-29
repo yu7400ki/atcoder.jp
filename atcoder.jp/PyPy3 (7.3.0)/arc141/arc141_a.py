@@ -1,5 +1,3 @@
-from math import ceil
-
 def f(n):
 	for i in range(1,int(n**0.5)+1):
 		if n % i == 0:
@@ -14,7 +12,9 @@ def main(c):
 		c_2 = int(c[l//d:l//d*2])
 		if c_1 > c_2:
 			c_1 -= 1
-		ans = str(c_1) * (d+1)
+		if len(str(c_1)) < d:
+			c_1 = '9' * d
+		ans = str(c_1) * d
 	else:
 		c_1 = int(c[0])
 		c_2 = int(c[1])
@@ -25,9 +25,7 @@ def main(c):
 		ans = str(c_1) * l
 
 	if int(ans) > int(c):
-		ans = ans[:l]
-		if int(ans) > int(c):
-			ans = ans[:-1]
+		ans = main(str(int(c)-1))
 	return ans
 
 T = int(input())
