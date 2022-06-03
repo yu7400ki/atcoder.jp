@@ -1,6 +1,8 @@
 n = int(input())
 
 def prime(n):
+    if n == 1:
+        return []
     is_prime = [True] * n
     is_prime[0] = is_prime[1] = False
     for i in range(2,int(n**0.5)+1):
