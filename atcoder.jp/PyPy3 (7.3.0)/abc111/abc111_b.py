@@ -1,7 +1,14 @@
-N = int(input())
+n = int(input())
 
-for i in range(N//100, 11):
-    ABC = int(str(i) * 3)
-    if ABC >= N:
-        print(ABC)
-        exit()
+def prime(n):
+    if n == 1:
+        return []
+    is_prime = [True] * n
+    is_prime[0] = is_prime[1] = False
+    for i in range(2,int(n**0.5)+1):
+        if is_prime[i]:
+            for j in range(i*i,n,i):
+                is_prime[j] = False
+    return [i for i in range(n) if is_prime[i]]
+
+print(len(prime(n)))
