@@ -1,25 +1,21 @@
+from collections import defaultdict
+
 N = int(input())
+ans = defaultdict(lambda : 0)
 
 def g(x,y,z):
 	return x**2 + y**2 + z**2 + x*y + y*z + z*x
 
-def f(n):
-	limit = int(n**0.5) + 2
-	cnt = 0
-	for x in range(1,limit):
-		for y in range(1,limit):
-			ok = 0
-			ng = limit
-			while ng - ok > 1:
-				mid = (ok + ng) // 2
-				if g(x,y,mid) <= n:
-					ok = mid
-				else:
-					ng = mid
-			if ok != 0:
-				if g(x,y,ok) == n:
-					cnt += 1
-	return cnt
+limit = int(N**0.5)+1
+for x in range(1,limit):
+	for y in range(1,limit):
+		for z in range(1,limit):
+			a = g(x,y,z)
+			if a <= N:
+				ans[a] += 1
 
 for i in range(1,N+1):
-	print(f(i))
+	if i in ans:
+		print(ans[i])
+	else:
+		print(0)
