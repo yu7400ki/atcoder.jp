@@ -1,12 +1,15 @@
 N = int(input())
 A = list(map(int,input().split()))
 
-MOD = 10**9+7
-ans = 0
-
+A_sum = [0] * (N+1)
 for i in range(N):
-	for j in range(i+1,N):
-		ans += A[i] * A[j]
-		ans %= MOD
+	A_sum[i+1] = A_sum[i] + A[i]
 
-print(ans)
+MOD = 10**9+7
+
+ans = 0
+for i in range(N-1):
+	ans += A[i] * (A_sum[-1] - A_sum[i+1])
+	ans %= MOD
+
+print(ans % MOD)
