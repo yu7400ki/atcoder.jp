@@ -13,6 +13,7 @@ def bfs(n,limit):
 	queue = deque()
 	queue.append(n)
 	dic[n] = 0
+	ans = n
 	for _ in range(limit):
 		if len(queue) == 0:
 			break
@@ -21,13 +22,11 @@ def bfs(n,limit):
 			if dic[i] == -1:
 				queue.append(i)
 				dic[i] = dic[pos] + 1
-	return dic
+				ans += i
+	return ans
 
 Q = int(input())
 for _ in range(Q):
 	x,k = map(int,input().split())
-	dic = bfs(x,k)
-	ans = 0
-	for n in dic:
-		ans += n
+	ans = bfs(x,k)
 	print(ans)
