@@ -20,9 +20,11 @@ def bfs(n,limit):
 		pos = queue.popleft()
 		for i in graph[pos]:
 			if dic[i] == -1:
-				queue.append(i)
 				dic[i] = dic[pos] + 1
-				ans += i
+				if dic[i] <= limit:
+					ans += i
+					if dic[i] < limit:
+						queue.append(i)
 	return ans
 
 Q = int(input())
