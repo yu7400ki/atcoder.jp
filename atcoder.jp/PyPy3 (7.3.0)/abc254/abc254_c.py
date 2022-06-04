@@ -12,6 +12,6 @@ for i in range(N - K):
 		if a[j] > a[j+K]:
 			flag = False
 			a[j], a[j+K] = a[j+K], a[j]
-		if flag: break
+	if flag: break
 
 print('Yes' if a == A else 'No')
