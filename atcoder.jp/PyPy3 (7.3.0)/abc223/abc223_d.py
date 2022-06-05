@@ -3,11 +3,13 @@ from heapq import heappop, heappush, heapify
 
 N, M = map(int,input().split())
 graph = defaultdict(set)
+graph_memo = defaultdict(set)
 memo = set(range(1,N+1))
 
 for _ in range(M):
 	a,b = map(int,input().split())
 	graph[a].add(b)
+	graph_memo[b].add(a)
 	memo.discard(b)
 
 memo = list(memo)
@@ -20,10 +22,8 @@ while len(memo) != 0:
 	l = graph[i]
 	del graph[i]
 	for j in l:
-		for g in graph.values():
-			if j in g:
-				break
-		else:
+		graph_memo[j].discard(i)
+		if len(graph_memo[j]) == 0:
 			heappush(memo, j)
 
 if len(graph) == 0:
