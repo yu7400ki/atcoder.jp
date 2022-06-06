@@ -8,6 +8,6 @@ for s in ICT:
             j = i
             break
     else:
-        print('No')
+        print('NO')
         exit()
-print('Yes')
+print('YES')
