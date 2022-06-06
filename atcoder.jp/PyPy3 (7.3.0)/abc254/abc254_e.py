@@ -14,9 +14,7 @@ def bfs(n,limit):
 	queue.append(n)
 	dic[n] = 0
 	ans = n
-	while True:
-		if len(queue) == 0:
-			break
+	while len(queue) != 0:
 		pos = queue.popleft()
 		for i in graph[pos]:
 			if dic[i] == -1:
