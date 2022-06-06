@@ -14,9 +14,15 @@ primes = prime(limit)
 
 cnt = 0
 length = len(primes)
-for i in range(length):
-    for j in range(i+1, length):
-        if primes[j] ** 3 * primes[i] <= N:
-            cnt += 1
+for i in range(length-1):
+    ok = i
+    ng = length
+    while ng - ok > 1:
+        mid = (ok + ng) // 2
+        if primes[mid] ** 3 * primes[i] <= N:
+            ok = mid
+        else:
+            ng = mid
+    cnt += ok - i
 
 print(cnt)
