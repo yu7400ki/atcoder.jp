@@ -13,7 +13,6 @@ if len(S) <= 2:
     exit()
 
 L = [val for val in S.values()]
-print(L)
 
 ans = 0
 for i in range(len(S) - 2):
