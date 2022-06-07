@@ -6,19 +6,13 @@ T = input()
 
 g = gcd(N,M)
 L = N * M // g
-X = [''] * L
 
-for i in range(N):
-	X[i*(L//N)] = S[i]
+n = N//g
+m = M//g
 
-for j in range(M):
-	if X[j*(L//M)] != '':
-		if X[j*L//M] == T[j]:
-			continue
-		else:
-			print(-1)
-			exit()
-	else:
-		X[j*(L//M)] = T[j]
+for i in range(g):
+	if S[i*n] != T[i*m]:
+		print(-1)
+		exit()
 
 print(L)
