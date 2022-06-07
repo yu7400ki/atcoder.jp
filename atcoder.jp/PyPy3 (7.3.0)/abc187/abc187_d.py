@@ -1,23 +1,17 @@
 N = int(input())
 
-sum_aoki = 0
-aoki = [0] * N
-AB = [[]] * N
+X = 0
+x = [0] * N
 for i in range(N):
-	a, b = map(int,input().split())
-	sum_aoki += a
-	aoki[i] = a
-	AB[i] = [a + b, i]
+	A, B = map(int,input().split())
+	X -= A
+	x[i] = 2 * A + B
 
-AB.sort(reverse=True, key=lambda x: x[0])
+x.sort()
 
 ans = 0
-takahashi = 0
-for num, idx in AB:
+while X <= 0:
+	X += x.pop()
 	ans += 1
-	sum_aoki -= aoki[idx]
-	takahashi += num
-	if takahashi > sum_aoki:
-		break
 
 print(ans)
