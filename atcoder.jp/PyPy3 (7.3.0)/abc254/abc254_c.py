@@ -2,16 +2,15 @@ N, K = map(int,input().split())
 a = list(map(int,input().split()))
 A = sorted(a)
 
-if K == 1:
-	print('Yes')
-	exit()
+div = [[] for _ in range(K)]
+for i in range(N):
+	div[i % K].append(a[i])
 
-for i in range(N - K):
-	flag = True
-	for j in range(N - K - i):
-		if a[j] > a[j+K]:
-			flag = False
-			a[j], a[j+K] = a[j+K], a[j]
-	if flag: break
+div = [sorted(e) for e in div]
 
-print('Yes' if a == A else 'No')
+res = [0] * N
+for i in range(len(div)):
+	for j in range(len(div[i])):
+		res[j*K+i] = div[i][j]
+
+print('Yes' if res == A else 'No')
