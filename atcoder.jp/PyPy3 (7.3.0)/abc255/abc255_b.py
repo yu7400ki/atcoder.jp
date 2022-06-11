@@ -19,4 +19,4 @@ ans = 0
 for d in dist.values():
 	ans = max(ans, d)
 
-print(d**0.5)
+print(ans**0.5)
