@@ -15,8 +15,15 @@ if n > N:
 	print(abs((A+(N+1)*D)-X))
 
 else:
-	ans = abs((A+(n+1)*D)-X)
-	if ans < abs((A+(n)*D)-X):
-		print(ans)
+	if D >= 0:
+		ans = abs((A+(n+1)*D)-X)
+		if ans < abs((A+(n)*D)-X):
+			print(ans)
+		else:
+			print(abs((A+(n)*D)-X))
 	else:
-		print(abs((A+(n)*D)-X))
+		ans = abs((A+(n+1)*D)-X)
+		if ans < abs((A+(n+2)*D)-X):
+			print(ans)
+		else:
+			print(abs((A+(n+2)*D)-X))
