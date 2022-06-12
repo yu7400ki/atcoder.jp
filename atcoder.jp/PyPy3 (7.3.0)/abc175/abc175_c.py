@@ -5,6 +5,9 @@ if X // D <= K:
 	d = X // D
 	X -= d * D
 	K -= d
+else:
+	X -= K * D
+	K = 0
 
 if K > 0:
 	positive = X
