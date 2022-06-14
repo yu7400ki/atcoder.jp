@@ -1,19 +1,18 @@
 N, M = map(int,input().split())
 
-group = []
-not_seen = set(range(1,N+1))
+par = list(range(N+1))
+
+def merge(n):
+	if par[n] == n:
+		return n
+	else:
+		par[n] = merge(par[n])
+		return par[n]
+
 for _ in range(M):
 	A, B = map(int,input().split())
-	not_seen.discard(A)
-	not_seen.discard(B)
-	for g in group:
-		if A in g or B in g:
-			g.add(A)
-			g.add(B)
-			break
-	else:
-		group.append(set())
-		group[-1].add(A)
-		group[-1].add(B)
+	par[B] = par[A]
+	merge(A)
+	merge(B)
 
-print(len(group)-1 + len(not_seen))
+print(len(set(par))-2)
