@@ -10,6 +10,7 @@ for _ in range(M):
 		if A in g or B in g:
 			g.add(A)
 			g.add(B)
+			break
 	else:
 		group.append(set())
 		group[-1].add(A)
