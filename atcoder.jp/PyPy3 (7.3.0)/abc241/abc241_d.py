@@ -1,3 +1,5 @@
+from bisect import insort_left
+
 Q = int(input())
 
 def binary_search(ok,ng,func):
@@ -14,8 +16,7 @@ for _ in range(Q):
 	query = list(map(int, input().split()))
 	if query[0] == 1:
 		x = int(query[1])
-		ok = binary_search(-1, len(A), lambda i: A[i] < x)
-		A.insert(ok+1, x)
+		insort_left(A, x)
 		continue
 
 	x, k = query[1], query[2]
