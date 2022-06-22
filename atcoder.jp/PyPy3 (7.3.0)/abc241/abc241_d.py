@@ -1,47 +1,35 @@
 Q = int(input())
 
+def binary_search(ok,ng,func):
+	while abs(ng - ok) > 1:
+		mid = (ok+ng) // 2
+		if func(mid):
+			ok = mid
+		else:
+			ng = mid
+	return ok
+
 A = []
-flag = False
 for _ in range(Q):
 	query = list(map(int, input().split()))
 	if query[0] == 1:
 		x = int(query[1])
-		A.append(x)
-		flag = True
+		ok = binary_search(-1, len(A), lambda i: A[i] < x)
+		A.insert(ok+1, x)
+		continue
 
-	elif query[0] == 2:
-		if flag:
-			A.sort()
-			flag = False
-		x, k = query[1], query[2]
-		k -= 1
-		ok = -1
-		ng = len(A)
-		while abs(ng - ok) > 1:
-			mid = (ok+ng) // 2
-			if A[mid] <= x:
-				ok = mid
-			else:
-				ng = mid
+	x, k = query[1], query[2]
+	k -= 1
+
+	if query[0] == 2:
+		ok = binary_search(-1, len(A), lambda i: A[i] <= x)
 		if ok == -1 or ok - k < 0:
 			print(-1)
 		else:
 			print(A[ok-k])
 
 	elif query[0] == 3:
-		if flag:
-			A.sort()
-			flag = False
-		x, k = query[1], query[2]
-		k -= 1
-		ok = len(A)
-		ng = -1
-		while abs(ng - ok) > 1:
-			mid = (ok+ng) // 2
-			if A[mid] >= x:
-				ok = mid
-			else:
-				ng = mid
+		ok = binary_search(len(A), -1, lambda i: A[i] >= x)
 		if ok == -1 or ok + k >= len(A):
 			print(-1)
 		else:
