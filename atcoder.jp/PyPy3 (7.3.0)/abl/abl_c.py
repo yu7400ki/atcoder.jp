@@ -1,30 +1,35 @@
-class UnionFind:
-	def __init__(self, n):
-		self.n = n
-		self.parent = [i for i in range(n)]
-		self.size = [1 for _ in range(n)]
-	def find(self, x):
-		if self.parent[x] == x:
-			return x
-		else:
-			self.parent[x] = self.find(self.parent[x])
-			return self.parent[x]
-	def union(self, x, y):
-		x = self.find(x)
-		y = self.find(y)
-		if x == y: return
-		if self.size[x] > self.size[y]:
-			self.parent[y] = x
-			self.size[x] += self.size[y]
-		else:
-			self.parent[x] = y
-			self.size[y] += self.size[x]
-	def same(self, x, y):
-		return self.find(x) == self.find(y)
-	def count(self):
-		return len(set(self.parent))
-	def size(self, x):
-		return self.size[self.find(x)]
+class UnionFind():
+    def __init__(self, n):
+        self.n = n
+        self.parents = [-1] * n
+
+    def find(self, x):
+        if self.parents[x] < 0:
+            return x
+        else:
+            self.parents[x] = self.find(self.parents[x])
+            return self.parents[x]
+
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+        if x == y: return
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x
+        self.parents[x] += self.parents[y]
+        self.parents[y] = x
+
+    def size(self, x):
+        return -self.parents[self.find(x)]
+
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
+
+    def group(self):
+        return len(self.roots())
 
 N, M = map(int,input().split())
 uf = UnionFind(N)
@@ -32,4 +37,4 @@ for _ in range(M):
 	A, B = map(int,input().split())
 	uf.union(A-1,B-1)
 
-print(uf.count()-1)
+print(uf.group()-1)
