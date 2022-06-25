@@ -1,33 +1,26 @@
 N = int(input())
-S = input()
+S = list(map(int,list(input())))
 W = list(map(int,input().split()))
 
-def binary_search(ok,ng,func):
-	while abs(ng - ok) > 1:
-		mid = (ok+ng) // 2
-		if func(mid):
-			ok = mid
-		else:
-			ng = mid
-	return ok
-
-child = []
-adult = []
-
+w = []
 for i in range(N):
-	if S[i] == '0':
-		child.append(W[i])
+	w.append((S[i], W[i]))
+
+w.sort(key=lambda x:x[1])
+
+child = [0]
+adult = [0]
+for i, n in enumerate(w):
+	if n[0] == 0:
+		child.append(child[-1] + 1)
+		adult.append(adult[-1])
+
 	else:
-		adult.append(W[i])
+		adult.append(adult[-1] + 1)
+		child.append(child[-1])
 
-if len(child) * len(adult) == 0:
-	print(max(len(child), len(adult)))
-	exit()
-
-child.sort()
-adult.sort()
-
-ans = len(child) + len(adult) - (binary_search(-1, len(adult), lambda i: adult[i] <= child[-1]) + 1)
-ans = max(ans, len(adult) + (binary_search(-1, len(child), lambda i: child[i] < adult[0]) + 1))
+ans = max(adult[-1], child[-1])
+for i in range(N):
+	ans = max(ans, child[i] + adult[-1] - adult[i])
 
 print(ans)
