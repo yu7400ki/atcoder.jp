@@ -21,7 +21,7 @@ for i in range(N):
         ans = max(ans, int(''.join(reversed(res))))
         res = []
         for k in range(N):
-            res.append(A[(i-k)%N][(j-k)%N])
+            res.append(A[(i-k)%N][(j+k)%N])
         ans = max(ans, int(''.join(res)))
         ans = max(ans, int(''.join(reversed(res))))
 
