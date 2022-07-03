@@ -14,5 +14,6 @@ for i in range(N):
             res3.append(A[(i+k)%N][(j+k)%N])
             res4.append(A[(i-k)%N][(j+k)%N])
         ans = max(ans, int(''.join(res1)), int(''.join(res2)), int(''.join(res3)), int(''.join(res4)))
+        ans = max(ans, int(''.join(res1[::-1])), int(''.join(res2[::-1])), int(''.join(res3[::-1])), int(''.join(res4[::-1])))
 
 print(ans)
