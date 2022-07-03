@@ -1,5 +1,5 @@
 from sys import stdin
-input = lambda: stdin.readline().rstrip()
+input = lambda : stdin.readline().rstrip()
 
 N, Q = map(int,input().split())
 S = list(input())
@@ -10,4 +10,4 @@ for _ in range(Q):
     if i == 1:
         idx = (N - x + idx) % N
     else:
-        print(S[(idx+x-1)%N])
+        print(S[(idx + x - 1) % N])
