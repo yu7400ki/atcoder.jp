@@ -10,13 +10,13 @@ fn main() {
     };
 
     let mut ans = 0;
-    let mut t = 0;
 
     for i in 0..=a {
         for j in 0..=b {
-            t = (x - (i*500 + j*100)) / 50;
-            if t <= c && t >= 0 {
-                ans += 1;
+            for k in 0..=c {
+                if i * 500 + j * 100 + k * 50 == x {
+                    ans += 1;
+                }
             }
         }
     };
