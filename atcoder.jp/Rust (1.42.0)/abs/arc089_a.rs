@@ -14,9 +14,10 @@ fn main() {
             x: i32,
             y: i32,
         };
-        time = t - time;
+        let dt = t - time;
+        time = t;
         let dist = (x - pos[0]).abs() + (y - pos[1]).abs();
-        if dist <= time && dist % 2 == time % 2 {
+        if dist % 2 == dt % 2 && dist <= dt {
             pos[0] = x;
             pos[1] = y;
         } else {
