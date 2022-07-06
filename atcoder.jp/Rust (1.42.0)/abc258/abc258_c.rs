@@ -14,7 +14,7 @@ fn main() {
             x: usize,
         };
         if m == 1 {
-            idx = n - x + idx;
+            idx = (n - x + idx) % n;
         } else if m == 2 {
             println!("{}", s.chars().nth((idx + x - 1) % n).unwrap());
         }
