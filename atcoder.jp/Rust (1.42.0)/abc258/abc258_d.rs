@@ -1,5 +1,6 @@
 use proconio::{input, fastout};
 use std::cmp::min;
+use std::usize;
 
 #[fastout]
 fn main() {
