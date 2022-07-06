@@ -1,6 +1,5 @@
-use proconio::{fastout, input};
+use proconio::{input};
 
-#[fastout]
 fn main() {
     let mut idx = 0;
     input! {
@@ -8,6 +7,7 @@ fn main() {
         q: usize,
         s: String,
     };
+    let s = s.chars().collect::<Vec<char>>();
     for _ in 0..q {
         input! {
             m: usize,
@@ -16,7 +16,7 @@ fn main() {
         if m == 1 {
             idx = (n - x + idx) % n;
         } else if m == 2 {
-            println!("{}", s.chars().nth((idx + x - 1) % n).unwrap());
+            println!("{}", s[(idx + x - 1) % n]);
         }
     };
 }
