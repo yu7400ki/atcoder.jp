@@ -19,7 +19,7 @@ fn prime(n: usize) -> Vec<usize> {
         .collect()
 }
 
-const LIMIT: usize = 10_usize.pow(6);
+const LIMIT: usize = 1000000;
 
 #[fastout]
 fn main() {
