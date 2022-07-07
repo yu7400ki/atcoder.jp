@@ -30,15 +30,15 @@ fn main() {
     };
 
     for i in 1..primes.len() {
-        let a = primes[i].pow(3);
-        if a * 2 > n {
+        let a:i128 = primes[i].pow(3) as i128;
+        if a * 2 > n as i128 {
             break;
         }
         let mut ok: usize = 0;
         let mut ng: usize = i;
         while (ng - ok) > 1 {
             let mid = (ok + ng) / 2;
-            if a * primes[mid] <= n {
+            if a * primes[mid] as i128 <= n as i128 {
                 ok = mid;
             } else {
                 ng = mid;
