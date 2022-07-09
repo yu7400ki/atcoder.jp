@@ -4,7 +4,7 @@ N = int(input())
 sx,sy,tx,ty = map(int,input().split())
 xyr = [list(map(int,input().split())) for _ in range(N)]
 
-graph = defaultdict(set)
+graph = defaultdict(list)
 
 def bfs(n):
     dic = defaultdict(lambda : -1)
@@ -30,8 +30,8 @@ for i in range(N):
         if (sx - xyr[i][0])**2 + (sy - xyr[i][1])**2 == xyr[i][2]**2: start = i
         if (tx - xyr[i][0])**2 + (ty - xyr[i][1])**2 == xyr[i][2]**2: end = i
         if is_collision(xyr[i][0], xyr[i][1], xyr[i][2], xyr[j][0], xyr[j][1], xyr[j][2]):
-            graph[i].add(j)
-            graph[j].add(i)
+            graph[i].append(j)
+            graph[j].append(i)
 
 if start == -1 or end == -1:
     print('No')
