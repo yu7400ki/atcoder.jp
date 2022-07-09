@@ -28,7 +28,7 @@ end = -1
 for i in range(N):
     for j in range(i+1, N):
         if (sx - xyr[i][0])**2 + (sy - xyr[i][1])**2 == xyr[i][2]**2: start = i
-        if (tx - xyr[j][0])**2 + (ty - xyr[j][1])**2 == xyr[j][2]**2: end = j
+        if (tx - xyr[j][0])**2 + (ty - xyr[j][1])**2 == xyr[j][2]**2: end = i
         if is_collision(xyr[i][0], xyr[i][1], xyr[i][2], xyr[j][0], xyr[j][1], xyr[j][2]):
             graph[i].add(j)
             graph[j].add(i)
