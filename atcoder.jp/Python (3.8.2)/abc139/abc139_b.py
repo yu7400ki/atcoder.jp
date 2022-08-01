@@ -1,8 +1,8 @@
 A, B = map(int,input().split())
 
-i = 0
+i = 1
 while True:
-    if A * (i+1) - i >= B:
-        print(i+1)
+    if A * i - (i-1) >= B:
+        print(i)
         break
     i += 1
