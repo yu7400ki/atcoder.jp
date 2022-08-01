@@ -1,6 +1,6 @@
 H, W = map(int,input().split())
 
-if W == 1:
+if W == 1 or H == 1:
     print(1)
     exit()
 
