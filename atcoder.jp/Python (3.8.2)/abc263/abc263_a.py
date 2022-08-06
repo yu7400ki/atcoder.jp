@@ -2,4 +2,10 @@ cards = list(map(int,input().split()))
 
 from collections import Counter
 
-print('Yes' if len(Counter(cards)) == 2 else 'No')
+c = Counter(cards)
+if len(c) == 2:
+    for i in c:
+        if c[i] == 2 or c[i] == 3:
+            print('Yes')
+            exit()
+print('No')
