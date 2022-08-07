@@ -1,8 +1,12 @@
 N, K = map(int,input().split())
 
-from math import gcd
-
-if K == 1:
-    print(0)
-else:
-    print(gcd(N, K))
+rev = N
+while True:
+    if N > K:
+        N = N - N//K * K
+    else:
+        N = K - N
+    if N >= rev:
+        print(rev)
+        exit()
+    rev = N
