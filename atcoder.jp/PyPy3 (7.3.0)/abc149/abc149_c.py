@@ -10,7 +10,7 @@ while True:
     for p in P:
         if N ** 0.5 < p:
             P.append(N)
-            if N > X:
+            if N >= X:
                 print(N)
                 exit()
             break
