@@ -9,7 +9,8 @@ for a in A:
         x -= a
         ans += 1
     else:
-        break
+        if x > 0 and ans > 0:
+            ans += 1
 
 if x > 0 and ans > 0:
     ans -= 1
