@@ -9,7 +9,7 @@ int main()
     for (int i = 0; i < 5; i++) {
         int x;
         cin >> x;
-        cnt.at(x)++;
+        cnt.at(x-1)++;
     }
 
     bool flag = find(cnt.begin(), cnt.end(), 3) != cnt.end() && find(cnt.begin(), cnt.end(), 2) != cnt.end();
