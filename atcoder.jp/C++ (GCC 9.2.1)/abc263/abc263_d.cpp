@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <numeric>
 using namespace std;
 
 int main()
@@ -9,6 +8,9 @@ int main()
     cin >> N >> L >> R;
     vector<int> A(N);
     for (int &a : A) cin >> a;
+
+    long long A_sum = 0;
+    for (int a : A) A_sum += a;
 
     vector<long long> R_d(N+1, 0);
     vector<long long> L_d(N+1, 0);
@@ -21,10 +23,10 @@ int main()
         L_d.at(i) = mi;
     }
 
-    long long ans = 1 << 30;
+    long long ans = (long long)1 << 62;
     for (int i = 0; i <= N; i++) ans = min(ans, R_d.at(i) + L_d.at(i));
 
-    cout << accumulate(A.begin(), A.end(), 0) + ans << endl;
+    cout << A_sum + ans << endl;
     
     return 0;
 }
