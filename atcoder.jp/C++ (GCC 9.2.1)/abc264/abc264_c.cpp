@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <bitset>
 using namespace std;
 
 int main()
@@ -14,13 +15,17 @@ int main()
     for (vector<int> &b : B) for (int &x : b) cin >> x;
 
     for (int i = 1; i < pow(2, H1); i++) {
+        bitset<10> I(i);
+        if (I.count() != H2) continue;
         for (int j = 1; j < pow(2, W1); j++) {
+            bitset<10> J(j);
+            if (J.count() != W2) continue;
             vector<vector<int>> temp;
             for (int k = 0; k < H1; k++) {
-                if (i >> k & 1) {
+                if (I.test(k)) {
                     vector<int> temp_h;
                     for (int l = 0; l < W1; l++) {
-                        if (j >> l & 1) {
+                        if (J.test(l)) {
                             temp_h.push_back(A.at(k).at(l));
                         }
                     }
