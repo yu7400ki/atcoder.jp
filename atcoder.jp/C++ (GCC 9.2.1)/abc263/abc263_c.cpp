@@ -3,7 +3,7 @@
 using namespace std;
 
 void bfs(vector<int> &A, int &N, int &M) {
-    if (A.size() == M - N + 1) {
+    if (A.size() == N) {
         for (int &a : A) cout << a << " ";
         cout << endl;
         return;
