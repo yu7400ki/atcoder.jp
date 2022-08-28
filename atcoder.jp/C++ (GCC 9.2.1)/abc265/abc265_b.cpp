@@ -5,7 +5,8 @@ using namespace std;
 
 int main()
 {
-    int N, M, T;
+    int N, M;
+    long long T;
     cin >> N >> M >> T;
     vector<int> A(N-1, 0);
     unordered_map<int, int> bonus;
