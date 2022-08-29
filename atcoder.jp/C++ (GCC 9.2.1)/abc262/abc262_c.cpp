@@ -10,7 +10,7 @@ int main()
     for (int &a : A) cin >> a;
 
     int cnt = 0;
-    int ans = 0;
+    long long ans = 0;
     for (int j = 1; j <= N; j++) {
         if (j == A.at(j-1)) {
             ans += cnt;
