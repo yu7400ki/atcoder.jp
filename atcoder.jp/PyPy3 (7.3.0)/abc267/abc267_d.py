@@ -1,7 +1,7 @@
 N, M = map(int,input().split())
 A = list(map(int,input().split()))
 
-dp = [[-float('inf')] * (N+1) for _ in range(M+1)]
+dp = [[-(1 << 63)] * (N+1) for _ in range(M+1)]
 dp[0] = [0] * (N+1)
 
 for i in range(1, M+1):
