@@ -1,30 +1,29 @@
-N, Q = map(int,input().split())
-A = list(map(int,input().split()))
+N, Q = map(int, input().split())
+A = list(map(int, input().split()))
 A.sort()
 
-def accumulate(l):
-	res = [0] * (len(l) + 1)
-	for i, n in enumerate(l):
-		res[i+1] = res[i] + n
-	return res
+A_accum = [0] * (N + 1)
+for i, n in enumerate(A):
+    A_accum[i + 1] = A_accum[i] + n
 
-A_accum = accumulate(A)
-
-def bin_search(ok,ng):
-	while abs(ng - ok) > 1:
-		mid = (ok+ng) // 2
-		if A[mid] < x:
-			ok = mid
-		else:
-			ng = mid
-	return ok
+def binary_search(lst, key, ok = -1, ng = None, f = None):
+    ng = len(lst) if ng is None else ng
+    f = (lambda x: lst[x] <= key) if f is None else f
+    
+    while abs(ok - ng) > 1:
+        mid = (ok + ng) // 2
+        if f(mid):
+            ok = mid
+        else:
+            ng = mid
+    
+    return ok
 
 for _ in range(Q):
-	x = int(input())
-	X = x * N
-	ok = bin_search(-1,N)
-	if ok == -1 or ok == N-1:
-		print(abs(A_accum[-1]-X))
-	else:
-		print(abs((A_accum[ok+1] - (x * (ok+1)))) + (A_accum[-1] - A_accum[ok+1] - x * (N - ok-1)))
-		#print(abs((A_accum[ok+1] - x)), (A_accum[-1] - A_accum[ok+1] - x * (N - ok-1)))
+    X = int(input())
+    ok = binary_search(A, X)
+    if ok == -1:
+        ans = A_accum[-1] - X * N
+    else:
+        ans = (X * (ok + 1) - A_accum[ok + 1]) + (A_accum[N] - A_accum[ok + 1] - (N - ok - 1) * X)
+    print(ans)
