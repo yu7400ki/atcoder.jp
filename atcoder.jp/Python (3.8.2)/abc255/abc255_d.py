@@ -7,8 +7,8 @@ for i, n in enumerate(A):
     A_accum[i + 1] = A_accum[i] + n
 
 def binary_search(lst, key, ok = -1, ng = None, f = None):
-    ng = len(lst) if ng is None else ng
-    f = (lambda x: lst[x] <= key) if f is None else f
+    ng = ng or len(lst)
+    f = f or (lambda x: lst[x] <= key)
     
     while abs(ok - ng) > 1:
         mid = (ok + ng) // 2
