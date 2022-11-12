@@ -1,12 +1,13 @@
-from itertools import permutations
-
 N = int(input())
 P = list(map(int,input().split()))
 
-prev = []
-for iter in permutations(range(1,N+1)):
-    if list(iter) == P:
-        print(*prev)
-        break
+idx1 = N - 1
+while P[idx1] > P[idx1 - 1]:
+    idx1 -= 1
+idx1 -= 1
 
-    prev = iter
+idx2 = P.index(P[idx1] - 1)
+
+P[idx1], P[idx2] = P[idx2], P[idx1]
+
+print(*P[:idx1 + 1], *sorted(P[idx1 + 1:], reverse=True))
