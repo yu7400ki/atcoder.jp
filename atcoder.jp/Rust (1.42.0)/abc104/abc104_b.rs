@@ -7,6 +7,6 @@ fn main() {
         s: String,
     }
 
-    let re = Regex::new(r"^A[a-z]{1}[a-z]*C[a-z]*[a-z]{2}$").unwrap();
+    let re = Regex::new(r"^A[a-z]+C[a-z]+$").unwrap();
     println!("{}", if re.is_match(&s) { "AC" } else { "WA" });
 }   
