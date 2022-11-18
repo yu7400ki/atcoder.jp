@@ -8,7 +8,7 @@ fn main() {
         k: i64,
     }
 
-    if a + k >= b - k {
+    if a + k > b - k {
         for i in a..=b {
             println!("{}", i);
         }
