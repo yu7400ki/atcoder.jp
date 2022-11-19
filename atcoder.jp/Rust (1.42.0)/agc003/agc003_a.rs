@@ -12,18 +12,14 @@ fn main() {
     let w = s_.chars().filter(|&c| c == 'W').count();
 
     let b1 = {
-        if n != 0 && s != 0 {
-            n % 2 == s % 2
-        } else if n == 0 && s == 0 {
+        if n != 0 && s != 0 || n == 0 && s == 0 {
             true
         } else {
             false
         }
     };
     let b2 = {
-        if e != 0 && w != 0 {
-            e % 2 == w % 2
-        } else if e == 0 && w == 0 {
+        if e != 0 && w != 0 || e == 0 && w == 0 {
             true
         } else {
             false
