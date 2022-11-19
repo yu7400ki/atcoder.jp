@@ -4,13 +4,13 @@ use proconio::{fastout, input};
 fn main() {
     input! {
         n: usize,
-        a: [i64; n],
+        a: [u64; n],
         q: usize,
     }
 
-    let mut b: Option<i64> = None;
+    let mut b: Option<u64> = None;
     let mut last_reset = 0;
-    let mut add = vec![(last_reset, 0i64); n];
+    let mut add = vec![(last_reset, 0u64); n];
 
     for iteration in 0..q {
         input! {
@@ -20,7 +20,7 @@ fn main() {
         match query {
             1 => {
                 input! {
-                    x: i64,
+                    x: u64,
                 }
                 b = Some(x);
                 last_reset = iteration;
@@ -28,7 +28,7 @@ fn main() {
             2 => {
                 input! {
                     i: usize,
-                    x: i64,
+                    x: u64,
                 }
                 if add[i - 1].0 < last_reset {
                     add[i - 1] = (last_reset, x);
@@ -41,10 +41,7 @@ fn main() {
                     i: usize,
                 }
                 let add = add[i - 1];
-                println!(
-                    "{}",
-                    add.1 + b.unwrap_or(a[i - 1])
-                );
+                println!("{}", add.1 + b.unwrap_or(a[i - 1]));
             }
         }
     }
