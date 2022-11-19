@@ -1,4 +1,5 @@
 use proconio::{fastout, input};
+use std::collections::HashMap;
 
 #[fastout]
 fn main() {
@@ -9,10 +10,9 @@ fn main() {
     }
 
     let mut b: Option<u64> = None;
-    let mut last_reset = 0;
-    let mut add = vec![(last_reset, 0u64); n];
+    let mut add: HashMap<usize, u64> = HashMap::new();
 
-    for iteration in 0..q {
+    for _ in 0..q {
         input! {
             query: usize,
         }
@@ -23,25 +23,20 @@ fn main() {
                     x: u64,
                 }
                 b = Some(x);
-                last_reset = iteration;
+                add.clear();
             }
             2 => {
                 input! {
                     i: usize,
                     x: u64,
                 }
-                if add[i - 1].0 < last_reset {
-                    add[i - 1] = (last_reset, x);
-                } else {
-                    add[i - 1].1 += x;
-                }
+                *add.entry(i).or_insert(0) += x;
             }
             _ => {
                 input! {
                     i: usize,
                 }
-                let add = add[i - 1];
-                println!("{}", add.1 + b.unwrap_or(a[i - 1]));
+                println!("{}", *add.entry(i).or_insert(0) + b.unwrap_or(a[i - 1]));
             }
         }
     }
