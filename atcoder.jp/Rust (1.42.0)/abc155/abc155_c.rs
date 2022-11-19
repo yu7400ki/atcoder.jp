@@ -14,7 +14,7 @@ fn main() {
         acc
     });
 
-    let max = *counter.values().last().unwrap();
+    let max = *counter.values().max().unwrap();
 
     for (k, _) in counter.iter().filter(|(_, v)| **v == max) {
         println!("{}", k);
