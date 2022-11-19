@@ -10,14 +10,14 @@ fn main() {
     a[0] = true;
     let prices = [100, 101, 102, 103, 104, 105];
 
-    for p in prices.iter() {
-        for i in 0..x {
-            if !a[i] {
-                continue;
-            }
+    for i in 0..x+1 {
+        if !a[i] {
+            continue;
+        }
 
-            for j in 1..(x - i) / p + 1 {
-                a[i + p * j] = true;
+        for &p in prices.iter() {
+            if i + p <= x {
+                a[i + p] = true;
             }
         }
     }
