@@ -10,13 +10,10 @@ fn main() {
     }
 
     h.sort();
-    let mut ans = 1 << 60;
 
-    for i in 0..n - k + 1 {
-        let hmin = h[i];
-        let hmax = h[i + k - 1];
-        ans = min(ans, hmax - hmin);
-    }
+    let ans = h
+        .windows(k)
+        .fold(std::i64::MAX, |acc, x| min(acc, x[k - 1] - x[0]));
 
     println!("{}", ans);
 }
