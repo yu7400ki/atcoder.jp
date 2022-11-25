@@ -19,18 +19,30 @@ fn main() {
         }
     }
 
-    'outer: for i in 10i32.pow((n - 1) as u32)..10i32.pow(n as u32) {
-        let i = i.to_string();
-        for j in 0..n {
-            if num[j] == 10 {
-                continue;
-            } else if num[j] != i.chars().nth(j).unwrap().to_digit(10).unwrap() as usize {
-                continue 'outer;
+    let ok = {
+        let num = num.clone();
+        move |x: usize| -> bool {
+            let x = x.to_string();
+            if x.len() != num.len() {
+                return false;
             }
+
+            for (i, c) in x.chars().enumerate() {
+                if num[i] != 10 && num[i] != c.to_digit(10).unwrap() as usize {
+                    return false;
+                }
+            }
+
+            true
         }
-        println!("{}", i);
-        return;
     };
+
+    for i in 0..1000 {
+        if ok(i) {
+            println!("{}", i);
+            return;
+        }
+    }
 
     println!("-1");
 }
