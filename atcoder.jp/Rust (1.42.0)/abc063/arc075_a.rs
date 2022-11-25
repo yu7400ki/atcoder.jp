@@ -1,28 +1,33 @@
 use proconio::{fastout, input};
 
+const LIMIT: usize = 100 * 100 + 1;
+
 #[fastout]
 fn main() {
     input! {
         n: usize,
-        mut s: [i64; n],
+        s: [i64; n],
     }
 
-    let s = {
-        s.sort();
-        s
-    };
+    let mut dp = vec![vec![false; LIMIT]; n + 1];
+    dp[0][0] = true;
 
-    let ans = s.iter().sum::<i64>();
-
-    if ans % 10 != 0 {
-        println!("{}", ans);
-        return;
+    for i in 0..n {
+        for j in 0..LIMIT {
+            dp[i + 1][j] |= dp[i][j];
+            if j as i64 + s[i] < LIMIT as i64 {
+                dp[i + 1][j + s[i] as usize] |= dp[i][j];
+            }
+        }
     }
 
-    let s = s.iter().filter(|&x| x % 10 != 0).collect::<Vec<_>>();
-    let min = s.iter().nth(0);
-    match min {
-        Some(&x) => println!("{}", ans - x),
-        None => println!("0"),
-    }
+    let ans = dp[n]
+        .iter()
+        .enumerate()
+        .filter(|(i, &x)| x && i % 10 != 0)
+        .map(|(i, _)| i)
+        .max()
+        .unwrap_or(0);
+
+    println!("{}", ans);
 }
