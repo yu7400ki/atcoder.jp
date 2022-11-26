@@ -2,24 +2,31 @@ H, W = map(int, input().split())
 S = [input() for _ in range(H)]
 T = [input() for _ in range(H)]
 
-S_cnt = []
-T_cnt = []
+Sh_cnt = [0] * H
+Th_cnt = [0] * H
+Sv_cnt = [0] * W
+Tv_cnt = [0] * W
+
+for i in range(H):
+    for j in range(W):
+        if S[i][j] == "#":
+            Sh_cnt[i] += 1
+        if T[i][j] == "#":
+            Th_cnt[i] += 1
 
 for i in range(W):
-    s = 0
-    t = 0
     for j in range(H):
         if S[j][i] == "#":
-            s += 1
+            Sv_cnt[i] += 1
         if T[j][i] == "#":
-            t += 1
-    S_cnt.append(s)
-    T_cnt.append(t)
+            Tv_cnt[i] += 1
 
-S_cnt.sort()
-T_cnt.sort()
+Sh_cnt.sort()
+Th_cnt.sort()
+Sv_cnt.sort()
+Sv_cnt.sort()
 
-if S_cnt == T_cnt:
+if Sh_cnt == Th_cnt and Sv_cnt == Tv_cnt:
     print("Yes")
 else:
     print("No")
