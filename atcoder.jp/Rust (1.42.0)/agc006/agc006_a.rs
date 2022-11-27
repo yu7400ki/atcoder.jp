@@ -13,12 +13,9 @@ fn main() {
         return;
     }
 
-    let s = s.chars().collect::<Vec<_>>();
-    let t = t.chars().collect::<Vec<_>>();
-
-    for i in 0..n {
-        if s[n-i-1] != t[i] {
-            println!("{}", 2 * n - i);
+    for i in 1..=n {
+        if s[n-i..] != t[..i] {
+            println!("{}", 2 * n - i + 1);
             return;
         }
     }
