@@ -8,15 +8,12 @@ fn main() {
         t: String,
     }
 
-    if s == t {
-        println!("{}", n);
-        return;
-    }
-
-    for i in 1..=n {
-        if s[n-i..] != t[..i] {
-            println!("{}", 2 * n - i + 1);
+    for i in 0..n {
+        if s[i..] == t[..n - i] {
+            println!("{}", 2 * n - (n - i));
             return;
         }
     }
+
+    println!("{}", 2 * n);
 }
