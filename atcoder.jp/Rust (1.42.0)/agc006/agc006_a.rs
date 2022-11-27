@@ -10,7 +10,7 @@ fn main() {
 
     for i in 0..n {
         if s[i..] == t[..n - i] {
-            println!("{}", 2 * n - (n - i));
+            println!("{}", n + i);
             return;
         }
     }
