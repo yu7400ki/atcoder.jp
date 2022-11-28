@@ -8,5 +8,5 @@ fn main() {
         a: [usize; n],
     }
 
-    println!("{}", n / (k - 1));
+    println!("{}", (n + k - 3) / (k - 1));
 }
