@@ -12,7 +12,8 @@ fn main() {
         ans += n;
         m -= n * 2;
     } else {
-        m += n * 2;
+        ans += m / 2;
+        m = 0;
     }
 
     ans += m / 4;
