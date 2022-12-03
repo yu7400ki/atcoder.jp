@@ -1,5 +1,4 @@
 from collections import Counter
-from math import ceil
 
 
 def factorize(n):
@@ -19,27 +18,18 @@ def factorize(n):
     return a
 
 
-def factorial(n):
-    res = 1
-    for i in range(2, n + 1):
-        res *= i
-    return res
-
-
 k = int(input())
 fact = Counter(factorize(k))
 
 ans = 0
 for i, cnt in fact.items():
-    res = 0
-    j = 1
+    j = 0
     while cnt > 0:
-        tmp = i * j
+        tmp = i * (j + 1)
         while tmp % i == 0:
             tmp //= i
             cnt -= 1
-        res += 1
         j += 1
-    ans = max(ans, i * res)
+    ans = max(ans, i * j)
 
 print(ans)
