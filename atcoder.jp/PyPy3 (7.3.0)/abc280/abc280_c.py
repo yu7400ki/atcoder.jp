@@ -7,3 +7,5 @@ for i in range(len(S)):
     else:
         print(i+1)
         break
+else:
+    print(len(T))
