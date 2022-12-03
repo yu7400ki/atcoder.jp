@@ -37,8 +37,8 @@ for i, cnt in fact.items():
         tmp = i * j
         while tmp % i == 0:
             tmp //= i
-            res += 1
             cnt -= 1
+        res += 1
         j += 1
     ans = max(ans, i * res)
 
