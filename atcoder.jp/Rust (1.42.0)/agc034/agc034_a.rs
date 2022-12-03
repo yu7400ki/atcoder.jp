@@ -19,7 +19,7 @@ fn main() {
             return;
         }
     } else {
-        let v = s[a - 1..d].iter().collect::<String>();
+        let v = s[b - 1..d].iter().collect::<String>();
         if v.contains("...") {
             let v = s[a - 1..c].iter().collect::<String>();
             if v.contains("##") {
