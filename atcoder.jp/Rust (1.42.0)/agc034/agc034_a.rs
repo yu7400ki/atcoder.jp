@@ -13,18 +13,16 @@ fn main() {
     let s = s.chars().collect::<Vec<_>>();
 
     if c < d {
-        let v = s[a - 1..c].iter().collect::<String>();
-        let w = s[b - 1..d].iter().collect::<String>();
-        if v.contains("##") || w.contains("##") {
+        let v = s[a - 1..d].iter().collect::<String>();
+        if v.contains("##") {
             println!("No");
             return;
         }
     } else {
-        let v = s[b - 2..d].iter().collect::<String>();
+        let v = s[b - 2..d + 1].iter().collect::<String>();
         if v.contains("...") {
             let v = s[a - 1..c].iter().collect::<String>();
-            let w = s[b - 1..d].iter().collect::<String>();
-            if v.contains("##") || w.contains("##") {
+            if v.contains("##") {
                 println!("No");
                 return;
             }
