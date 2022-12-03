@@ -31,6 +31,15 @@ fact = Counter(factorize(k))
 
 ans = 0
 for i, cnt in fact.items():
-    ans = max(ans, cnt * i)
+    res = 0
+    j = 1
+    while cnt > 0:
+        tmp = i * j
+        while tmp % i == 0:
+            tmp //= i
+            res += 1
+            cnt -= 1
+        j += 1
+    ans = max(ans, i * res)
 
 print(ans)
