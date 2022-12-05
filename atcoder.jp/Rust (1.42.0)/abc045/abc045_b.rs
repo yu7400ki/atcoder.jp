@@ -3,17 +3,15 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        sa: String,
-        sb: String,
-        sc: String,
+        s: [String; 3],
     }
 
-    let mut sa = sa.chars().rev().collect::<Vec<_>>();
-    let mut sb = sb.chars().rev().collect::<Vec<_>>();
-    let mut sc = sc.chars().rev().collect::<Vec<_>>();
+    let mut s = s
+        .into_iter()
+        .map(|s| s.chars().rev().collect::<Vec<_>>())
+        .collect::<Vec<_>>();
 
-    let s = [&mut sa, &mut sb, &mut sc];
-    let mut turn = 0usize;
+    let mut turn = 0;
 
     let winner = loop {
         if let Some(c) = s[turn].pop() {
