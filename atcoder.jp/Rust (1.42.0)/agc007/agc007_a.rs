@@ -1,5 +1,16 @@
 use proconio::{fastout, input};
 
+fn counter<T>(v: &[T]) -> std::collections::HashMap<T, usize>
+where
+    T: std::cmp::Eq + std::hash::Hash + Copy,
+{
+    v.iter()
+        .fold(std::collections::HashMap::new(), |mut map, &x| {
+            *map.entry(x).or_insert(0) += 1;
+            map
+        })
+}
+
 #[fastout]
 fn main() {
     input! {
@@ -8,39 +19,9 @@ fn main() {
         a: [String; h],
     }
 
-    let a = {
-        let a = [
-            vec![".".repeat(w + 2)],
-            a.iter().map(|s| format!(".{}.", s)).collect::<Vec<_>>(),
-            vec![".".repeat(w + 2)],
-        ]
-        .concat();
+    let a = a.iter().flat_map(|s| s.chars()).collect::<Vec<_>>();
+    let cnt = counter(&a);
+    let ans = *cnt.get(&'#').unwrap() == h + w - 1;
 
-        a.iter()
-            .map(|s| {
-                s.chars()
-                    .map(|c| if c == '#' { 1 } else { 0 })
-                    .collect::<Vec<_>>()
-            })
-            .collect::<Vec<_>>()
-    };
-
-    let mut pos = (1, 1);
-    let ans = loop {
-        if a[pos.0 + 1][pos.1] + a[pos.0][pos.1 + 1] != 1 {
-            break "Impossible";
-        }
-
-        if a[pos.0 + 1][pos.1] == 1 {
-            pos.0 += 1;
-        } else {
-            pos.1 += 1;
-        }
-
-        if pos == (h, w) {
-            break "Possible";
-        }
-    };
-
-    println!("{}", ans);
+    println!("{}", if ans { "Possible" } else { "Impossible" });
 }
