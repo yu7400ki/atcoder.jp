@@ -7,18 +7,15 @@ fn main() {
         y: i64,
     }
 
-    let mut ans = 0;
-
-    if y < x {
-        ans += 1;
-        x *= -1;
-    }
-
-    ans += (y.abs() - x.abs()).abs();
-
-    if y < x {
-        ans += 1;
-    }
+    let ans = if x * y < 0 {
+        (x + y).abs() + 1
+    } else if x < y {
+        y - x
+    } else if x * y == 0 {
+        x - y + 1
+    } else {
+        x - y + 2
+    };
 
     println!("{}", ans);
 }
