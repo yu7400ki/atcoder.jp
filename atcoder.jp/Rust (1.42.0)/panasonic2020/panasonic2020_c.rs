@@ -3,9 +3,9 @@ use proconio::{fastout, input};
 #[fastout]
 fn main() {
     input! {
-        a: u64,
-        b: u64,
-        c: u64,
+        a: i64,
+        b: i64,
+        c: i64,
     }
 
     let d = c - a - b;
