@@ -40,7 +40,6 @@ while nodes:
     nodes = nodes.difference(set(color.keys()))
 
 for color in colors:
-    _ans = 0
     u = set()
     v = set()
     for i, j in color.items():
@@ -49,14 +48,12 @@ for color in colors:
         else:
             v.add(i)
 
-    for i in range(1, N+1):
-        if i in u:
-            _ans += len(v) - len(graph[i] & v)
-        elif i in v:
-            _ans += len(u) - len(graph[i] & u)
+    for node in u:
+        ans += len(v) - len(graph[node] & v)
 
-    _ans //= 2
-    ans += _ans
+for i in range(len(colors)):
+    for j in range(i+1, len(colors)):
+        ans += len(colors[i].keys()) * len(colors[j].keys())
 
 
 print(ans)
