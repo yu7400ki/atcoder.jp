@@ -1,10 +1,10 @@
 from collections import defaultdict, deque
 
-def bipartite(graph):
+def bipartite(graph, n):
     color = defaultdict(lambda : 0)
-    color[1] = 1
+    color[n] = 1
     queue = deque()
-    queue.append(1)
+    queue.append(n)
 
     while queue:
         v = queue.popleft()
@@ -19,6 +19,7 @@ def bipartite(graph):
 
 
 N, M = map(int, input().split())
+nodes = set(range(1, N+1))
 
 graph = defaultdict(set)
 for i in range(M):
@@ -27,27 +28,38 @@ for i in range(M):
     graph[b].add(a)
 
 ans = 0
-color = bipartite(graph)
 
-if color is None:
+colors = []
+while nodes:
+    color = bipartite(graph, nodes.pop())
+    colors.append(color)
+    nodes = nodes.difference(set(color.keys()))
+
+if colors == []:
+    print(ans)
+    exit()
+if any(color is None for color in colors):
     print(ans)
     exit()
 
-u = set()
-v = set()
-for i, j in color.items():
-    if j == 1:
-        u.add(i)
-    else:
-        v.add(i)
+for color in colors:
+    u = set()
+    v = set()
+    for i, j in color.items():
+        if j == 1:
+            u.add(i)
+        else:
+            v.add(i)
 
+    for i in range(1, N+1):
+        if i in u:
+            ans += len(v) - len(graph[i] & v)
+        elif i in v:
+            ans += len(u) - len(graph[i] & u)
 
-for i in range(1, N+1):
-    if i in u:
-        ans += len(v) - len(graph[i] & v)
-    elif i in v:
-        ans += len(u) - len(graph[i] & u)
+ans //= 2
 
+ans += sum(len(color) for color in colors) - 1
 
+print(ans)
 
-print(ans // 2)
