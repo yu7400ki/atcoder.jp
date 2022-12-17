@@ -33,12 +33,21 @@ if color is None:
     print(ans)
     exit()
 
+u = set()
+v = set()
+for i, j in color.items():
+    if j == 1:
+        u.add(i)
+    else:
+        v.add(i)
+
+
 for i in range(1, N+1):
-    for j in range(i+1, N+1):
-        if i in graph[j]:
-            continue
-        if color[i] != color[j]:
-            ans += 1
+    if i in u:
+        ans += len(v) - len(graph[i] & v)
+    elif i in v:
+        ans += len(u) - len(graph[i] & u)
 
 
-print(ans)
+
+print(ans // 2)
