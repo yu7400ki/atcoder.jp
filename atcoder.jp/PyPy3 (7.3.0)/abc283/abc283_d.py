@@ -38,7 +38,7 @@ for i in range(N):
         box_copy = box_accum[-1].copy()
         box_accum.append(box_copy)
 
-        ok = binary_search(open_accum, open_accum[i] - close_cnt)
+        ok = binary_search(open_accum, open_accum[i + 1] - close_cnt)
 
         delete_box = box_accum[i] - box_accum[ok]
         box -= delete_box
