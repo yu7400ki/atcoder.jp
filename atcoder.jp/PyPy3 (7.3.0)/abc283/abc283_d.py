@@ -19,7 +19,7 @@ box = set()
 box_accum = [set()]
 
 open_accum = [0]
-for i in range(N-1, -1, -1):
+for i in range(N):
     if S[i] == "(":
         open_accum.append(open_accum[-1] + 1)
     elif S[i] == ")":
@@ -33,16 +33,14 @@ for i in range(N):
     if S[i] == "(":
         box_copy = box_accum[-1].copy()
         box_accum.append(box_copy)
-        pass
     elif S[i] == ")":
         close_cnt += 1
         box_copy = box_accum[-1].copy()
         box_accum.append(box_copy)
 
-        ok = binary_search(open_accum, close_cnt)
-        idx = N - ok
+        ok = binary_search(open_accum, open_accum[i] - close_cnt)
 
-        delete_box = box_accum[i] - box_accum[idx]
+        delete_box = box_accum[i] - box_accum[ok]
         box -= delete_box
     else:
         if S[i] in box:
