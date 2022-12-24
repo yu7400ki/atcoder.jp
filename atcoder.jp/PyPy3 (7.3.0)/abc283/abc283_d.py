@@ -12,6 +12,20 @@ for i in range(N):
 pair = {v: k for k, v in pair.items()}
 
 
+box_accum = [set()]
+for i in range(N):
+    if S[i] == "(":
+        copy = box_accum[-1].copy()
+        box_accum.append(copy)
+    elif S[i] == ")":
+        copy = box_accum[-1].copy()
+        box_accum.append(copy)
+    else:
+        copy = box_accum[-1].copy()
+        copy.add(S[i])
+        box_accum.append(copy)
+
+
 box = set()
 
 for i in range(N):
@@ -20,7 +34,8 @@ for i in range(N):
     elif S[i] == ")":
         idx = pair[i]
 
-        box -= set(S[idx:i])
+        delete = box_accum[i] - box_accum[idx]
+        box -= delete
     else:
         if S[i] in box:
             print("No")
