@@ -34,7 +34,7 @@ for i in range(N):
     elif S[i] == ")":
         idx = pair[i]
 
-        delete = box_accum[i] - box_accum[idx]
+        delete = box_accum[i] - box_accum[idx + 1]
         box -= delete
     else:
         if S[i] in box:
