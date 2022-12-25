@@ -4,7 +4,7 @@ use proconio::{fastout, input};
 fn main() {
     input! {
         n: usize,
-        mut l: [u16; n],
+        mut l: [i64; n],
     }
     l.sort();
 
