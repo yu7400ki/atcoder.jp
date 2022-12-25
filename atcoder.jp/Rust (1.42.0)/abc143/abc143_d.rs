@@ -6,7 +6,6 @@ fn main() {
         n: usize,
         mut l: [i64; n],
     }
-    l.sort();
 
     let mut ans = 0;
     for i in 0..n {
@@ -15,7 +14,7 @@ fn main() {
                 let a = l[i];
                 let b = l[j];
                 let c = l[k];
-                if a + b > c {
+                if a < b + c && b < c + a && c < a + b {
                     ans += 1;
                 }
             }
