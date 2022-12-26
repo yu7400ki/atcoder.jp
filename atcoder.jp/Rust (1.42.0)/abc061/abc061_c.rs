@@ -5,10 +5,11 @@ fn main() {
     input! {
         n: usize,
         mut k: usize,
-        ab: [(usize, usize); n],
+        mut ab: [(usize, usize); n],
     }
 
     let mut idx = 0;
+    ab.sort_by_key(|x| x.0);
 
     while k > 0 {
         let b = ab[idx].1;
