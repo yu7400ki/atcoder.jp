@@ -8,10 +8,8 @@ def solve(n):
             return (int(b), a)
     if n % 4 == 0:
         b = 2
-        a = n / b ** 2
-        if a.is_integer():
-            return (b, int(a))
-
+        a = n // b ** 2
+        return (b, a)
 
     d = 3
     while True:
@@ -23,9 +21,8 @@ def solve(n):
 
         if n % (d ** 2) == 0:
             b = d
-            a = n / b ** 2
-            if a.is_integer():
-                return (b, int(a))
+            a = n // b ** 2
+            return (b, a)
 
         d += 2
 
