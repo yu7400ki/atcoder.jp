@@ -19,7 +19,8 @@ def dfs(graph, n, visited):
             dfs(graph, v, visited)
             ans += 1
             if ans >= limit:
-                return
+                print(limit)
+                exit()
     visited.discard(n)
 
 dfs(graph, 1, set())
