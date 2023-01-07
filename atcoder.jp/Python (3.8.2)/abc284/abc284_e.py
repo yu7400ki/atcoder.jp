@@ -1,4 +1,7 @@
 from collections import defaultdict
+import sys
+sys.setrecursionlimit(10**6)
+
 
 N, M = map(int, input().split())
 
@@ -16,11 +19,12 @@ def dfs(graph, n, visited):
     visited.add(n)
     for v in graph[n]:
         if v not in visited:
-            dfs(graph, v, visited)
             ans += 1
             if ans >= limit:
-                return
-    visited.remove(n)
+                print(limit)
+                exit()
+            dfs(graph, v, visited)
+    visited.discard(n)
 
 dfs(graph, 1, set())
 
