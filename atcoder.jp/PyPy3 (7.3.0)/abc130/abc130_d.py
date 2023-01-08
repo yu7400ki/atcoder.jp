@@ -6,7 +6,7 @@ num = 0
 left = 0
 right = 0
 
-while left < N - 1:
+while left < N:
     if right == N or num >= K:
         num -= A[left]
         left += 1
