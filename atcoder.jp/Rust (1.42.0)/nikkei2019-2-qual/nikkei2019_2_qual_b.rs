@@ -1,6 +1,6 @@
 use proconio::{fastout, input};
 
-const MOD: usize = 1_000_000_007;
+const MOD: usize = 998_244_353;
 
 #[fastout]
 fn main() {
