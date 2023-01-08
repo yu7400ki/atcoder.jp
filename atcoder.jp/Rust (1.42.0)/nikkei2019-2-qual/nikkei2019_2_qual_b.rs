@@ -17,11 +17,11 @@ fn main() {
     }
 
     let ans = (0..*d.iter().max().unwrap()).fold(1, |acc, i| {
-        acc * d_count
-            .get(&i)
-            .unwrap_or(&0)
-            .pow(*d_count.get(&(i + 1)).unwrap_or(&0) as u32)
-            % MOD
+        acc * modpow(
+            *d_count.get(&i).unwrap_or(&0),
+            *d_count.get(&(i + 1)).unwrap_or(&0),
+            MOD,
+        ) % MOD
     });
 
     println!("{}", ans);
@@ -36,4 +36,18 @@ where
             *map.entry(x).or_insert(0) += 1;
             map
         })
+}
+
+fn modpow(x: usize, n: usize, m: usize) -> usize {
+    let mut ret = 1;
+    let mut x = x;
+    let mut n = n;
+    while n > 0 {
+        if n & 1 == 1 {
+            ret = ret * x % m;
+        }
+        x = x * x % m;
+        n >>= 1;
+    }
+    ret
 }
