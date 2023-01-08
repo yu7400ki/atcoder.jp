@@ -11,27 +11,16 @@ fn main() {
 
     let d_count = counter(&d);
 
-    if d[0] != 0 {
+    if d[0] != 0 || d_count.get(&0).unwrap() != &1 {
         println!("0");
         return;
     }
 
-    if d_count.get(&0).unwrap() != &1 {
-        println!("0");
-        return;
-    }
-
-    let max_height = d_count.len() - 1;
-    if *d.iter().max().unwrap() != max_height {
-        println!("0");
-        return;
-    }
-
-    let ans = (0..max_height).fold(1, |acc, i| {
+    let ans = (0..*d.iter().max().unwrap()).fold(1, |acc, i| {
         acc * d_count
             .get(&i)
-            .unwrap()
-            .pow(*d_count.get(&(i + 1)).unwrap() as u32)
+            .unwrap_or(&0)
+            .pow(*d_count.get(&(i + 1)).unwrap_or(&0) as u32)
             % MOD
     });
 
