@@ -29,7 +29,7 @@ impl StringExt for String {
         let mut start = 0;
         while let Some(i) = self[start..].find(s) {
             count += 1;
-            start += i + s.len();
+            start += i + 1;
         }
         count
     }
