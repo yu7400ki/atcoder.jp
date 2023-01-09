@@ -7,15 +7,25 @@ fn main() {
         s: [String; n],
     }
 
-    let end_a = s.iter().filter(|s| s.ends_with("A")).count();
-    let start_b = s.iter().filter(|s| s.starts_with("B")).count();
-    let ans = s.iter().map(|s| s.count("AB")).sum::<usize>() + std::cmp::min(end_a, start_b);
+    let both = s
+        .iter()
+        .filter(|s| s.starts_with("B") && s.ends_with("A"))
+        .count();
+    let end_a = s.iter().filter(|s| s.ends_with("A")).count() - both;
+    let start_b = s.iter().filter(|s| s.starts_with("B")).count() - both;
 
-    if end_a == n && start_b == n {
-        println!("{}", ans - 1);
-    } else {
-        println!("{}", ans);
-    }
+    let ans = s.iter().map(|s| s.count("AB")).sum::<usize>()
+        + if end_a == 0 && start_b == 0 {
+            if both == 0 {
+                0
+            } else {
+                both - 1
+            }
+        } else {
+            both + std::cmp::min(end_a, start_b)
+        };
+
+    println!("{}", ans);
 }
 
 trait StringExt {
@@ -29,7 +39,7 @@ impl StringExt for String {
         let mut start = 0;
         while let Some(i) = self[start..].find(s) {
             count += 1;
-            start += i + 1;
+            start += i + s.len();
         }
         count
     }
