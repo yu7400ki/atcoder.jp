@@ -24,8 +24,7 @@ def hasCycle(graph):
                     queue.append(v)
                     depth[v] = depth[u] + 1
                 else:
-                    if depth[v] != depth[u] - 1:
-                        return True
+                    return True
 
         return depth
 
