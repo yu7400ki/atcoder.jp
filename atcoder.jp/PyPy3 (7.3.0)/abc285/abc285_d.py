@@ -3,36 +3,42 @@ from collections import defaultdict, deque
 N = int(input())
 
 graph = defaultdict(set)
-nodes = set()
+
 for _ in range(N):
     S, T = input().split()
     graph[S].add(T)
-    nodes.add(S)
 
+def hasCycle(graph):
+    nodes = set(graph.keys())
 
-def hasCycle(graph, node):
-    depth = defaultdict(lambda: -1)
-    depth[node] = 0
-    queue = deque([node])
-    res = False
-    while queue:
-        v = queue.popleft()
-        for u in graph[v]:
-            if depth[u] == -1:
-                depth[u] = depth[v] + 1
-                queue.append(u)
-            else:
-                res = True
-    return depth, res
+    def bfs(graph, n):
+        depth = defaultdict(lambda : -1)
+        depth[n] = 0
+        queue = deque()
+        queue.append(n)
 
+        while queue:
+            u = queue.popleft()
+            for v in graph[u]:
+                if depth[v] == -1:
+                    queue.append(v)
+                    depth[v] = depth[u] + 1
+                else:
+                    if depth[v] != depth[u] - 1:
+                        return True
 
-while nodes:
-    node = nodes.pop()
-    depth, res = hasCycle(graph, node)
-    if res:
-        print("No")
-        exit()
-    for k, v in depth.items():
-        nodes.discard(k)
+        return depth
 
-print("Yes")
+    while nodes:
+        n = nodes.pop()
+        depth = bfs(graph, n)
+        if depth == True:
+            return True
+        nodes -= set(depth.keys())
+
+    return False
+
+if not hasCycle(graph):
+    print("Yes")
+else:
+    print("No")
