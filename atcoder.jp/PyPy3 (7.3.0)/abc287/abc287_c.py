@@ -26,23 +26,23 @@ if start == 0 or end == N + 1:
     exit()
 
 pos = start
-visited = set()
-visited.add(pos)
+visited = set([pos])
 while pos != end:
     for next in graph[pos]:
-        if next in visited:
-            continue
+        visited.add(next)
         if len(graph[next]) == 2:
+            graph[next].remove(pos)
             pos = next
-            visited.add(pos)
             break
         if len(graph[next]) == 1:
             if next == end:
                 pos = next
-                visited.add(pos)
                 break
     else:
         print("No")
         exit()
 
-print("Yes")
+if len(visited) == N:
+    print("Yes")
+else:
+    print("No")
