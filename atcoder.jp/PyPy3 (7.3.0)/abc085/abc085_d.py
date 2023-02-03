@@ -10,11 +10,10 @@ b_acc = [0] * (N + 1)
 for i in range(N):
     b_acc[i + 1] = b_acc[i] + B[i]
 
-ans = (H + a_max - 1) // a_max
-
-for i in range(N):
-    b = b_acc[i + 1]
-    tmp = (i + 1) + (H - b + a_max - 1) // a_max
+ans = 1 << 60
+for i in range(N + 1):
+    b = b_acc[i]
+    tmp = i + (H - b + a_max - 1) // a_max
     ans = min(ans, tmp)
 
 print(ans)
