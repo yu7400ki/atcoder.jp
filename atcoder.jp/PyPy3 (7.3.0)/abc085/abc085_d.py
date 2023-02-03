@@ -1,0 +1,20 @@
+N, H = map(int, input().split())
+A = [0] * N
+B = [0] * N
+for i in range(N):
+    A[i], B[i] = map(int, input().split())
+
+a_max = max(A)
+B.sort(reverse=True)
+b_acc = [0] * (N + 1)
+for i in range(N):
+    b_acc[i + 1] = b_acc[i] + B[i]
+
+ans = (H + a_max - 1) // a_max
+
+for i in range(N):
+    b = b_acc[i + 1]
+    tmp = (i + 1) + (H - b + a_max - 1) // a_max
+    ans = min(ans, tmp)
+
+print(ans)
