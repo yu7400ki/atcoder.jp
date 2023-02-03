@@ -12,6 +12,7 @@ while B and B[-1] > a_max and H > 0:
     H -= B.pop()
     ans += 1
 
-ans += (H + a_max - 1) // a_max
+if H > 0:
+    ans += (H + a_max - 1) // a_max
 
 print(ans)
