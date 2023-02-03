@@ -5,15 +5,13 @@ for i in range(N):
     A[i], B[i] = map(int, input().split())
 
 a_max = max(A)
-B.sort(reverse=True)
-b_acc = [0] * (N + 1)
-for i in range(N):
-    b_acc[i + 1] = b_acc[i] + B[i]
+B.sort()
 
-ans = 1 << 60
-for i in range(N + 1):
-    b = b_acc[i]
-    tmp = i + (H - b + a_max - 1) // a_max
-    ans = min(ans, tmp)
+ans = 0
+while B and B[-1] > a_max and H > 0:
+    H -= B.pop()
+    ans += 1
+
+ans += (H + a_max - 1) // a_max
 
 print(ans)
