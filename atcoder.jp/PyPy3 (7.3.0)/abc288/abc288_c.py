@@ -1,41 +1,47 @@
-from collections import defaultdict, deque
+class UnionFind():
+    def __init__(self, n):
+        self.n = n
+        self.parents = [-1] * n
+
+    def find(self, x):
+        if self.parents[x] < 0:
+            return x
+        else:
+            self.parents[x] = self.find(self.parents[x])
+            return self.parents[x]
+
+    def union(self, x, y):
+        x = self.find(x)
+        y = self.find(y)
+        if x == y: return
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x
+        self.parents[x] += self.parents[y]
+        self.parents[y] = x
+
+    def size(self, x):
+        return -self.parents[self.find(x)]
+
+    def same(self, x, y):
+        return self.find(x) == self.find(y)
+
+    def roots(self):
+        return [i for i, x in enumerate(self.parents) if x < 0]
+
+    def group(self):
+        return len(self.roots())
 
 N, M = map(int, input().split())
 
-graph = defaultdict(set)
-nodes = set()
+union = UnionFind(N)
+ans = 0
 
 for _ in range(M):
     A, B = map(int, input().split())
-    graph[A].add(B)
-    graph[B].add(A)
-    nodes.add(A)
-    nodes.add(B)
 
-def bfs(graph, n):
-    x = 0
-    depth = defaultdict(lambda : -1)
-    depth[n] = 0
-    queue = deque()
-    queue.append(n)
+    if union.same(A - 1, B - 1):
+        ans += 1
 
-    while queue:
-        u = queue.popleft()
-        for v in graph[u]:
-            if depth[v] == -1:
-                queue.append(v)
-                depth[v] = depth[u] + 1
-            else:
-                if depth[v] != depth[u] - 1:
-                    x += 1
-
-    return depth, x // 2
-
-ans = 0
-while nodes:
-    n = nodes.pop()
-    depth, x = bfs(graph, n)
-    nodes -= set(depth.keys())
-    ans += x
+    union.union(A - 1, B - 1)
 
 print(ans)
