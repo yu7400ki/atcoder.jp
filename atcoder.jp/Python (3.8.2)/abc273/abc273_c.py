@@ -6,9 +6,9 @@ def solve():
 
     count = Counter(A)
     for i in sorted(list(set(A)), reverse=True):
-        print(count[i])
+        print(count[i], flush=True)
     for _ in range(N - len(count)):
-        print(0)
+        print(0, flush=True)
 
 if __name__ == "__main__":
     solve()
