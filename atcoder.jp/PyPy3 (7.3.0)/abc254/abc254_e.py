@@ -1,10 +1,11 @@
 from collections import defaultdict, deque
 
-def fastout(f):
-    import builtins, functools, io, os
+def fastio(f):
+    import builtins, functools, io, os, sys
 
     buf = io.BytesIO()
     builtin_print = builtins.print
+    builtin_input = builtins.input
 
     def fast_print(arg, *args, sep=" ", end="\n", **_):
         sep = sep.encode()
@@ -15,14 +16,19 @@ def fastout(f):
             buf.write(str(arg).encode())
         buf.write(end)
 
+    def fast_input():
+        return sys.stdin.readline().rstrip()
+
     @functools.wraps(f)
     def wrapper(*args, **kwargs):
         builtins.print = fast_print
+        builtins.input = fast_input
         res = f(*args, **kwargs)
         os.write(1, buf.getvalue())
         buf.seek(0)
         buf.truncate(0)
         builtins.print = builtin_print
+        builtins.input = builtin_input
         return res
 
     return wrapper
@@ -44,7 +50,7 @@ def bfs(graph, n, limit):
                         queue.append(i)
     return ans
 
-@fastout
+@fastio
 def solve():
     N, M = map(int, input().split())
     graph = defaultdict(list)
