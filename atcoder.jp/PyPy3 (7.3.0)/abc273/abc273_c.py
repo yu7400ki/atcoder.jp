@@ -1,11 +1,31 @@
-import io, os
-buf = io.BytesIO()
-def print(*args, sep=" ", end="\n"):
-    for arg in args:
-        buf.write(str(arg).encode())
-        buf.write(sep.encode())
-    buf.write(end.encode())
+def fastout(f):
+    import builtins, functools, io, os
+    buf = io.BytesIO()
 
+    original_print = builtins.print
+
+    def fast_print(*args, sep=" ", end="\n", **_):
+        for arg in args:
+            buf.write(str(arg).encode())
+            buf.write(sep.encode())
+        offset = buf.tell() - len(sep.encode())
+        buf.seek(offset)
+        buf.truncate(offset)
+        buf.write(end.encode())
+
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        builtins.print = fast_print
+        res = f(*args, **kwargs)
+        os.write(1, buf.getvalue())
+        buf.seek(0)
+        buf.truncate(0)
+        builtins.print = original_print
+        return res
+
+    return wrapper
+
+@fastout
 def solve():
     from collections import Counter
 
@@ -20,4 +40,3 @@ def solve():
 
 if __name__ == "__main__":
     solve()
-    os.write(1, buf.getvalue())
