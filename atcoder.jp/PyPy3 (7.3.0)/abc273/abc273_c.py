@@ -1,17 +1,17 @@
 def fastout(f):
     import builtins, functools, io, os
+
     buf = io.BytesIO()
+    builtin_print = builtins.print
 
-    original_print = builtins.print
-
-    def fast_print(*args, sep=" ", end="\n", **_):
+    def fast_print(arg, *args, sep=" ", end="\n", **_):
+        sep = sep.encode()
+        end = end.encode()
+        buf.write(str(arg).encode())
         for arg in args:
+            buf.write(sep)
             buf.write(str(arg).encode())
-            buf.write(sep.encode())
-        offset = buf.tell() - len(sep.encode())
-        buf.seek(offset)
-        buf.truncate(offset)
-        buf.write(end.encode())
+        buf.write(end)
 
     @functools.wraps(f)
     def wrapper(*args, **kwargs):
@@ -20,7 +20,7 @@ def fastout(f):
         os.write(1, buf.getvalue())
         buf.seek(0)
         buf.truncate(0)
-        builtins.print = original_print
+        builtins.print = builtin_print
         return res
 
     return wrapper
