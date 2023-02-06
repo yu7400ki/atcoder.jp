@@ -1,5 +1,32 @@
 from collections import defaultdict, deque
 
+def fastout(f):
+    import builtins, functools, io, os
+
+    buf = io.BytesIO()
+    builtin_print = builtins.print
+
+    def fast_print(arg, *args, sep=" ", end="\n", **_):
+        sep = sep.encode()
+        end = end.encode()
+        buf.write(str(arg).encode())
+        for arg in args:
+            buf.write(sep)
+            buf.write(str(arg).encode())
+        buf.write(end)
+
+    @functools.wraps(f)
+    def wrapper(*args, **kwargs):
+        builtins.print = fast_print
+        res = f(*args, **kwargs)
+        os.write(1, buf.getvalue())
+        buf.seek(0)
+        buf.truncate(0)
+        builtins.print = builtin_print
+        return res
+
+    return wrapper
+
 def bfs(graph, n, limit):
     dic = defaultdict(lambda : -1)
     queue = deque()
@@ -17,6 +44,7 @@ def bfs(graph, n, limit):
                         queue.append(i)
     return ans
 
+@fastout
 def solve():
     N, M = map(int, input().split())
     graph = defaultdict(list)
