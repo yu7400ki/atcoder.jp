@@ -1,31 +1,35 @@
-from collections import defaultdict, deque
-
 H, W = map(int, input().split())
-S = [list("#" * (W + 2))] + [list("#" + input() + "#") for _ in range(H)] + [list("#" * (W + 2))]
+S = [list(input()) for _ in range(H)]
+INF = 1 << 60
 
-ans = 0
-for y1 in range(1, H + 1):
-    for x1 in range(1, W + 1):
-        for y2 in range(1, H + 1):
-            for x2 in range(1, W + 1):
-                s = (y1, x1)
-                e = (y2, x2)
+def grid_to_graph(grid, wall="#"):
+    H, W = len(grid), len(grid[0])
+    graph = [[0] * (W * H) for _ in range(W * H)]
+    for i in range(H):
+        for j in range(W):
+            if grid[i][j] == wall:
+                continue
+            parent = i * W + j
+            for x, y in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                if 0 <= x < H and 0 <= y < W and grid[x][y] != wall:
+                    adj = x * W + y
+                    graph[parent][adj] = 1
+                    graph[adj][parent] = 1
+    return graph
 
-                if S[y1][x1] == "#" or S[y2][x2] == "#":
-                    continue
+def warshall_floyd(graph):
+    V = len(graph)
+    dist = [[graph[i][j] if graph[i][j] != 0 else 0 if i == j else INF for j in range(V)] for i in range(V)]
 
-                depth = defaultdict(lambda : -1)
-                depth[s] = 0
-                queue = deque([s])
+    for k in range(V):
+        for i in range(V):
+            for j in range(V):
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 
-                while queue:
-                    u = queue.popleft()
-                    for v in [(u[0] + 1, u[1]), (u[0] - 1, u[1]), (u[0], u[1] + 1), (u[0], u[1] - 1)]:
-                        if S[v[0]][v[1]] == "#" or depth[v] != -1:
-                            continue
-                        queue.append(v)
-                        depth[v] = depth[u] + 1
+    return dist
 
-                ans = max(ans, depth[e])
+graph = grid_to_graph(S)
+dist = warshall_floyd(graph)
+ans = max([max(d, key=lambda x: -1 if x == INF else x) for d in dist])
 
 print(ans)
