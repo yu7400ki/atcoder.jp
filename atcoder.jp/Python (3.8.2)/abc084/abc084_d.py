@@ -8,35 +8,26 @@ def prime(n):
     return set(p for p in range(n+1) if is_prime[p])
 
 def like2017(n):
-    res = []
+    res = [False] * (n + 1)
     primes = prime(n)
     for p in primes:
         if p == 2:
             continue
         if (p + 1) // 2 in primes:
-            res.append(p)
-    res.sort()
+            res[p] = True
     return res
 
-def binary_search(lst, target, ok = -1, ng = None, key = None):
-    ng = len(lst) if ng is None else ng
-    key = (lambda x: lst[x] <= target) if key is None else key
-
-    while abs(ok - ng) > 1:
-        mid = (ok + ng) // 2
-        if key(mid):
-            ok = mid
-        else:
-            ng = mid
-
-    return ok
+def accumulate(l):
+    res = [0] * (len(l) + 1)
+    for i, n in enumerate(l):
+        res[i + 1] = res[i] + n
+    return res
 
 candidates = like2017(10**5)
+acc = accumulate(candidates)
 
 Q = int(input())
 
 for _ in range(Q):
     l, r = map(int, input().split())
-    lower = binary_search(candidates, l, ok = len(candidates), ng = -1, key = lambda x: candidates[x] >= l)
-    upper = binary_search(candidates, r)
-    print(upper - lower + 1)
+    print(acc[r + 1] - acc[l])
