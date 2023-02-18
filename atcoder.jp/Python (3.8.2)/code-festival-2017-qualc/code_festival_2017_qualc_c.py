@@ -1,14 +1,21 @@
-S = list(input())
+from collections import deque
+
+S = deque(input())
 
 ans = 0
-T = []
-for s in S:
-    if s == "x":
+
+while len(S) > 1:
+    if S[0] == S[-1]:
+        S.popleft()
+        S.pop()
+    elif S[0] == "x":
+        S.popleft()
+        ans += 1
+    elif S[-1] == "x":
+        S.pop()
         ans += 1
     else:
-        T.append(s)
-
-if T != T[::-1]:
-    ans = -1
+        ans = -1
+        break
 
 print(ans)
