@@ -13,18 +13,22 @@ res = [lst.popleft()]
 rest = []
 
 while True:
-    a = lst.popleft()
-    if a == res[-1]:
-        rest.append(a)
-    elif a == res[-1] + 1:
-        res.append(a)
+    if lst:
+        a = lst.popleft()
+        if a == res[-1]:
+            rest.append(a)
+        elif a == res[-1] + 1:
+            res.append(a)
+        else:
+            res.append(a)
+            while len(res) != K:
+                if rest:
+                    res.append(rest.pop())
+                else:
+                    res.append(lst.pop())
     else:
-        res.append(a)
         while len(res) != K:
-            if rest:
-                res.append(rest.pop())
-            else:
-                res.append(lst.pop())
+            res.append(rest.pop())
     if len(res) == K:
         break
 
