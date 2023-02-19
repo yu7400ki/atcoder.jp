@@ -3,20 +3,27 @@ from itertools import permutations
 N = int(input())
 XY = [tuple(map(int, input().split())) for _ in range(N)]
 
-ans = 1 << 60
+dists = set()
 for p in permutations(XY, 2):
     x1, y1 = p[0]
     x2, y2 = p[1]
-    d1 = x2 - x1, y2 - y1
+    d = x2 - x1, y2 - y1
+    dists.add(d)
 
-    cnt = 0
-    for x3, y3 in XY:
-        for x4, y4 in XY:
-            d2 = x4 - x3, y4 - y3
-            if d1 == d2:
-                cnt += 1
-                break
-
-    ans = min(ans, N - cnt)
+ans = 1 << 60
+for dx, dy in dists:
+    tmp = 1
+    current = XY[0]
+    rest = set(XY[1:])
+    while rest:
+        x1, y1 = current
+        x2, y2 = x1 + dx, y1 + dy
+        if (x2, y2) in rest:
+            rest.remove((x2, y2))
+            current = x2, y2
+        else:
+            tmp += 1
+            current = rest.pop()
+    ans = min(ans, tmp)
 
 print(ans)
