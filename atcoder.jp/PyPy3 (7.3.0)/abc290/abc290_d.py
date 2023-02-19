@@ -26,6 +26,7 @@ def solve():
                     break
             if flag:
                 break
+        history.append(a)
 
 
 T = int(input())
