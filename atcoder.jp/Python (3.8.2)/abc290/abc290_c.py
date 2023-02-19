@@ -9,7 +9,7 @@ if lst[0] != 0:
     print(0)
     exit()
 
-if N == 1:
+if K == 1:
     print(1)
     exit()
 
