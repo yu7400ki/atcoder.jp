@@ -22,16 +22,6 @@ def bfs(graph, n, d):
 
 N, M = map(int, input().split())
 
-if N == 1:
-    print("Yes")
-    print(1)
-    exit()
-
-if M == 0:
-    print("Yes")
-    print("".join(["1"] * N))
-    exit()
-
 graph = defaultdict(set)
 for _ in range(M):
     u, v = map(int, input().split())
