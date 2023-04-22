@@ -37,7 +37,7 @@ K = int(input())
 
 if K == 0:
     print("Yes")
-    print("".join(["0"] * N))
+    print("".join(["1"] * N))
     exit()
 
 depths = {}
