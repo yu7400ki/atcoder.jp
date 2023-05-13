@@ -20,9 +20,9 @@ def dfs(s, i = 0):
     if i == len(S):
         return "".join(s)
     if S[i] == "?":
-        s[i] = "1"
-        l = dfs(s, i + 1)
         s[i] = "0"
+        l = dfs(s, i + 1)
+        s[i] = "1"
         r = dfs(s, i + 1)
         s[i] = "?"
         res = max(l, r, key=lambda x: int(x, 2))
