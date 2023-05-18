@@ -1,9 +1,17 @@
-H, W = map(int,input().split())
-A = [list(map(int,input().split())) for _ in range(H)]
+H, W = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(H)]
 
-A_h = [sum(A[i]) for i in range(H)]
-A_w = [sum([A[i][j] for i in range(H)]) for j in range(W)]
+count_x = [0] * W
+count_y = [0] * H
 
-ans = [[A_h[i] + A_w[j] - A[i][j] for j in range(W)] for i in range(H)]
-for h in ans:
-	print(*h)
+for y in range(H):
+    for x in range(W):
+        count_x[x] += grid[y][x]
+        count_y[y] += grid[y][x]
+
+ans = [[0] * W for _ in range(H)]
+
+for y in range(H):
+    for x in range(W):
+        ans[y][x] = count_x[x] + count_y[y] - grid[y][x]
+    print(" ".join(map(str, ans[y])))
