@@ -1,24 +1,28 @@
-N, L = map(int,input().split())
+N, L = map(int, input().split())
 K = int(input())
-A = [0] + list(map(int,input().split())) + [L]
+A = list(map(int, input().split()))
 
-def can_cut(n):
+
+def is_ok(x):
     cnt = 0
-    l = 0
-    for i in range(1,N+2):
-        l += A[i] - A[i-1]
-        if l >= n:
+    pre = 0
+    for a in A:
+        if a - pre >= x:
             cnt += 1
-            l = 0
-    return cnt >= K+1
+            pre = a
+    if L - pre >= x:
+        cnt += 1
+    return cnt >= K + 1
 
-ok = -1
-ng = L
-while ng - ok > 1:
-    mid = (ok+ng) // 2
-    if can_cut(mid):
-        ok = mid
-    else:
-        ng = mid
 
-print(ok)
+def binary_search(ok, ng):
+    while abs(ok - ng) > 1:
+        mid = (ok + ng) // 2
+        if is_ok(mid):
+            ok = mid
+        else:
+            ng = mid
+    return ok
+
+
+print(binary_search(0, L + 1))
