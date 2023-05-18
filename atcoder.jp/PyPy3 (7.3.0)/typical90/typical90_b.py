@@ -1,23 +1,22 @@
-from collections import deque
-
 N = int(input())
 
-for i in range(2**N):
-    l = deque()
-    cnt1 = 0
-    cnt2 = 0
-    s = ''
-    for j in range(N):
-        l.appendleft(i>>j&1)
-    for n in l:
-        if n == 0:
-            cnt1 += 1
-            s += '('
+
+for bit in range(2 ** N):
+    cnt = 0
+    for i in range(N):
+        if bit << i & 1 << N - 1:
+            cnt -= 1
         else:
-            cnt2 += 1
-            s += ')'
-        if cnt1 < cnt2:
+            cnt += 1
+        if cnt < 0:
             break
     else:
-        if cnt1 == cnt2:
-            print(s)
+        if cnt != 0:
+            continue
+        ans = ""
+        for i in range(N):
+            if bit << i & 1 << N - 1:
+                ans += ")"
+            else:
+                ans += "("
+        print(ans)
