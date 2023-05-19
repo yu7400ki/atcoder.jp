@@ -1,28 +1,22 @@
 N = int(input())
-A = list(map(int,input().split()))
+A = sorted(map(int, input().split()))
 Q = int(input())
 
-A.sort()
+def binary_search(lst, target, ok = -1, ng = None, key = None):
+    ng = len(lst) if ng is None else ng
+    key = (lambda x: lst[x] <= target) if key is None else key
 
-for i in range(Q):
-    B = int(input())
-    
-    ok = len(A)
-    ng = -1
-    while ok - ng > 1:
-        mid = (ok+ng) // 2
-        if A[mid] > B:
+    while abs(ok - ng) > 1:
+        mid = (ok + ng) // 2
+        if key(mid):
             ok = mid
         else:
             ng = mid
-    if ok == len(A):
-        ok -= 1
-    if ok >= 1:
-        if abs(A[ok] - B) < abs(A[ok-1] - B):
-            ans = abs(A[ok] - B)
-        else:
-            ans = abs(A[ok-1] - B)
-    else:
-        ans = abs(A[ok] - B)
 
-    print(ans)
+    return ok
+
+for _ in range(Q):
+    B = int(input())
+    ok = max(binary_search(A, B), 0)
+    or_ = min(ok + 1, N - 1)
+    print(min(map(abs, [A[ok] - B, A[or_] - B])))
