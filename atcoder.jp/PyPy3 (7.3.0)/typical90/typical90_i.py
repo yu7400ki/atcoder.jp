@@ -1,40 +1,47 @@
-from math import acos, degrees
-from itertools import permutations
+from collections import namedtuple
+from math import atan2, degrees
 
-
-class Vec:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def norm(self):
-        return (self.x ** 2 + self.y ** 2) ** 0.5
-
-    def dot(self, other):
-        return self.x * other.x + self.y * other.y
-
-    def __sub__(self, other):
-        return Vec(self.x - other.x, self.y - other.y)
-
-    def __str__(self) -> str:
-        return f"({self.x}, {self.y})"
-
-    def __repr__(self) -> str:
-        return f"Vec({self.x}, {self.y})"
-
+Point = namedtuple('Point', ['x', 'y'])
 
 N = int(input())
-XY = [Vec(*map(int, input().split())) for _ in range(N)]
+XY = [Point(*map(int, input().split())) for _ in range(N)]
+
+
+def calc_slope(point1, point2):
+    deg =  degrees(atan2(point2.y - point1.y, point2.x - point1.x))
+    return deg if deg >= 0 else 360 + deg
+
+
+def deg_diff(deg1, deg2):
+    diff = abs(deg1 - deg2)
+    return min(diff, 360 - diff)
+
+
+def binary_search(lst, target, ok = -1, ng = None, key = None):
+    ng = len(lst) if ng is None else ng
+    key = (lambda x: lst[x] <= target) if key is None else key
+
+    while abs(ok - ng) > 1:
+        mid = (ok + ng) // 2
+        if key(mid):
+            ok = mid
+        else:
+            ng = mid
+
+    return ok
+
 
 ans = 0
-for i, j, k in permutations(range(N), 3):
-    p_i = XY[i]
-    p_j = XY[j]
-    p_k = XY[k]
-    u = p_j - p_i
-    v = p_k - p_i
-    cos = u.dot(v) / (u.norm() * v.norm())
-    deg = degrees(acos(cos))
-    ans = max(ans, deg)
+for p_j in XY:
+    slopes_dict = {}
+    for p_i in XY:
+        if p_i == p_j:
+            continue
+        slopes_dict[p_i] = calc_slope(p_j, p_i)
+    slopes = sorted(slopes_dict.values())
+    for p_i, slope in slopes_dict.items():
+        ok = min(binary_search(slopes, 360 - slope), 0)
+        or_ = max(ok + 1, len(slopes) - 1)
+        ans = max(ans, deg_diff(slopes[ok], slope), deg_diff(slopes[or_], slope))
 
 print(ans)
