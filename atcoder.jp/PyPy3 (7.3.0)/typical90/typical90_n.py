@@ -1,12 +1,11 @@
-N = int(input())
-A = list(map(int,input().split()))
-B = list(map(int,input().split()))
+from collections import deque
 
-A.sort()
-B.sort()
+N = int(input())
+A = sorted(map(int, input().split()))
+B = sorted(map(int, input().split()))
 
 ans = 0
-for i in range(N):
-    ans += abs(A[i] - B[i])
+for a, b in zip(A, B):
+    ans += abs(a - b)
 
 print(ans)
