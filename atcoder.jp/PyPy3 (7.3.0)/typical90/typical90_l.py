@@ -1,13 +1,10 @@
+from collections import defaultdict
+
 class UnionFind():
-    def __init__(self, nodes):
-        self.nodes = nodes
-        self.par = {}
-        self.rank = {}
-        self.size = {}
-        for node in nodes:
-            self.par[node] = -1
-            self.rank[node] = 0
-            self.size[node] = 1
+    def __init__(self):
+        self.par = defaultdict(lambda: -1)
+        self.rank = defaultdict(lambda: 0)
+        self.size = defaultdict(lambda: 1)
 
     def find(self, node):
         if self.par[node] == -1:
@@ -34,17 +31,10 @@ class UnionFind():
 H, W = map(int, input().split())
 
 Q = int(input())
-union = []
-query = []
+uf = UnionFind()
+seen = set()
 for _ in range(Q):
     q = list(map(int, input().split()))
-    if q[0] == 1:
-        union.append(tuple(q[1:]))
-    query.append(q)
-
-uf = UnionFind(union)
-seen = set()
-for q in query:
     if q[0] == 1:
         rc = (q[1], q[2])
         for dr, dc in ((0, 1), (1, 0), (0, -1), (-1, 0)):
