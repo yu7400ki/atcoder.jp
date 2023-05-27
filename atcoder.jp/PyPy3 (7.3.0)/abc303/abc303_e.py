@@ -10,31 +10,27 @@ for _ in range(N - 1):
     degree[u] += 1
     degree[v] += 1
 
+degree_one = set()
+for e, d in degree.items():
+    if d == 1:
+        degree_one.add(e)
+
 levels = []
-while True:
-    deletable = []
-    for e, d in degree.items():
-        if d != 1:
-            continue
-        r = graph[e].pop()
-        levels.append(len(graph[r]))
-        for e in graph[r]:
-            for f in graph[e]:
-                if f == r:
-                    continue
-                degree[f] -= 1
-                graph[f].discard(e)
-            degree[e] = 0
-            del graph[e]
-            deletable.append(e)
-        degree[r] = 0
-        del graph[r]
-        deletable.append(r)
-        break
-    else:
-        break
-    for e in deletable:
-        del degree[e]
+while degree_one:
+    e = degree_one.pop()
+    r = graph[e].pop()
+    levels.append(len(graph[r]))
+    for e in graph[r]:
+        for f in graph[e]:
+            if f == r:
+                continue
+            degree[f] -= 1
+            graph[f].discard(e)
+            if degree[f] == 1:
+                degree_one.add(f)
+        del graph[e]
+        degree_one.discard(e)
+    del graph[r]
 
 levels.sort()
 print(" ".join(map(str, levels)))
