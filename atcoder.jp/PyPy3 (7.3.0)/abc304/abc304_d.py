@@ -1,30 +1,24 @@
 from bisect import bisect_left
-from collections import defaultdict
+from collections import Counter
 
 W, H = map(int, input().split())
 N = int(input())
 pq = [tuple(map(int, input().split())) for _ in range(N)]
 A = int(input())
-a = sorted(list(map(int, input().split())))
+a = list(map(int, input().split()))
 B = int(input())
-b = sorted(list(map(int, input().split())))
+b = list(map(int, input().split()))
 
-# counts = [[0] * (A + 1) for _ in range(B + 1)]
-counts = defaultdict(lambda: defaultdict(int))
-
-filled = set()
-min_count = float("inf")
-max_count = 0
-
+cells = []
 for p, q in pq:
     i = bisect_left(a, p)
     j = bisect_left(b, q)
-    counts[j][i] += 1
-    filled.add((i, j))
-    min_count = min(min_count, counts[j][i])
-    max_count = max(max_count, counts[j][i])
+    cells.append((i, j))
 
-if len(filled) == (A + 1) * (B + 1):
-    print(min_count, max_count)
-else:
-    print(0, max_count)
+counts = Counter(cells)
+max_count = max(counts.values())
+min_count = 0
+
+if len(cells) == (A + 1) * (B + 1):
+    min_count = min(counts.values())
+print(min_count, max_count)
