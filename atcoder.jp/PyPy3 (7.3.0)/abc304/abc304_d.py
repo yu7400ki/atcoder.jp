@@ -1,5 +1,5 @@
 from bisect import bisect_left
-from collections import Counter
+from collections import defaultdict
 
 W, H = map(int, input().split())
 N = int(input())
@@ -9,16 +9,15 @@ a = list(map(int, input().split()))
 B = int(input())
 b = list(map(int, input().split()))
 
-cells = []
+counts = defaultdict(int)
 for p, q in pq:
     i = bisect_left(a, p)
     j = bisect_left(b, q)
-    cells.append((i, j))
+    counts[(i, j)] += 1
 
-counts = Counter(cells)
 max_count = max(counts.values())
 min_count = 0
 
-if len(cells) == (A + 1) * (B + 1):
+if len(counts) == (A + 1) * (B + 1):
     min_count = min(counts.values())
 print(min_count, max_count)
