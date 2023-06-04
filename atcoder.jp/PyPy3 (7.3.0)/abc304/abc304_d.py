@@ -19,6 +19,6 @@ counts = Counter(cells)
 max_count = max(counts.values())
 min_count = 0
 
-if len(cells) == (A + 1) * (B + 1):
+if len(counts) == (A + 1) * (B + 1):
     min_count = min(counts.values())
 print(min_count, max_count)
