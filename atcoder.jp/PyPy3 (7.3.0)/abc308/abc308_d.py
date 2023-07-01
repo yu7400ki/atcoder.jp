@@ -1,3 +1,6 @@
+import sys
+sys.setrecursionlimit(10 ** 6)
+
 H, W = map(int, input().split())
 S = [list(input()) for _ in range(H)]
 
