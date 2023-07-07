@@ -6,8 +6,6 @@ for i, s in enumerate(S):
     if d <= K:
         S[i] = "a"
         K -= d
-
-if K != 0:
-    S[-1] = chr(ord(S[-1]) + K % 26)
+S[-1] = chr(ord(S[-1]) + K % 26)
 
 print(*S, sep="")
