@@ -13,7 +13,8 @@ for y in range(H):
             tmp = 0
         cntH[y][x] = tmp
     for x in range(W - 1, 0, -1):
-        cntH[y][x - 1] = max(cntH[y][x - 1], cntH[y][x])
+        if cntH[y][x - 1]:
+            cntH[y][x - 1] = max(cntH[y][x - 1], cntH[y][x])
 
 for x in range(W):
     tmp = 0
@@ -24,7 +25,8 @@ for x in range(W):
             tmp = 0
         cntV[y][x] = tmp
     for y in range(H - 1, 0, -1):
-        cntV[y - 1][x] = max(cntV[y - 1][x], cntV[y][x])
+        if cntV[y - 1][x]:
+            cntV[y - 1][x] = max(cntV[y - 1][x], cntV[y][x])
 
 ans = 0
 for i in range(H * W):
