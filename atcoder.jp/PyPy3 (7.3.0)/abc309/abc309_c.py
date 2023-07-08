@@ -16,7 +16,7 @@ for i, a_i in enumerate(A_sorted):
 for i in range(N):
     acc[i + 1] += acc[i]
 
-for i in range(N):
+for i in range(N + 1):
     if acc[i] <= K:
         if i == 0:
             print(1)
