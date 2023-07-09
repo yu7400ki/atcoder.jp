@@ -10,18 +10,14 @@ for _ in range(M):
     graph[b].add(a)
 
 def bfs(graph, n):
-    depth = defaultdict(lambda : -1)
-    depth[n] = 0
-    queue = deque()
-    queue.append(n)
-
+    queue = deque([n])
+    depth = {n: 0}
     while queue:
-        u = queue.popleft()
-        for v in graph[u]:
-            if depth[v] == -1:
-                queue.append(v)
-                depth[v] = depth[u] + 1
-
+        v = queue.popleft()
+        for w in graph[v]:
+            if w not in depth:
+                depth[w] = depth[v] + 1
+                queue.append(w)
     return depth
 
 depth_1 = bfs(graph, 1)
