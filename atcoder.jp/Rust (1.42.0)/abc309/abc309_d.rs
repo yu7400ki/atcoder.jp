@@ -38,8 +38,8 @@ fn main() {
     let depth1 = bfs(&graph, 1);
     let depth2 = bfs(&graph, n1 + n2);
 
-    let length1 = depth1.iter().max_by_key(|(_, &v)| v).unwrap().1;
-    let length2 = depth2.iter().max_by_key(|(_, &v)| v).unwrap().1;
+    let length1 = depth1.values().max().unwrap();
+    let length2 = depth2.values().max().unwrap();
 
     println!("{}", length1 + length2 + 1);
 }
