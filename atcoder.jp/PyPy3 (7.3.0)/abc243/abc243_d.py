@@ -10,10 +10,10 @@ for s in S:
 
 for s in T[1:]:
     if s == 'U':
-        X //= 2
+        X >>= 1
     elif s == 'L':
-        X *= 2
+        X <<= 1
     else:
-        X = X * 2 + 1
+        X = (X << 1) + 1
 
 print(X)
