@@ -1,7 +1,7 @@
 use proconio::{fastout, input};
-use std::collections::{HashMap, VecDeque, HashSet};
+use std::collections::{HashMap, VecDeque};
 
-fn bfs<T>(graph: &HashMap<T, HashSet<T>>, start: T) -> HashMap<T, usize>
+fn bfs<T>(graph: &HashMap<T, Vec<T>>, start: T) -> HashMap<T, usize>
 where
     T: Eq + std::hash::Hash + Copy,
 {
@@ -10,7 +10,7 @@ where
     let mut depth = HashMap::new();
     depth.insert(start, 0);
     while let Some(u) = queue.pop_front() {
-        for &v in graph.get(&u).unwrap() {
+        for &v in graph.get(&u).unwrap_or(&Vec::new()) {
             if !depth.contains_key(&v) {
                 depth.insert(v, depth[&u] + 1);
                 queue.push_back(v);
@@ -26,13 +26,16 @@ fn main() {
         n1: usize,
         n2: usize,
         m: usize,
-        ab: [(usize, usize); m],
     }
 
     let mut graph = HashMap::new();
-    for (a, b) in ab {
-        graph.entry(a).or_insert(HashSet::new()).insert(b);
-        graph.entry(b).or_insert(HashSet::new()).insert(a);
+    for _ in 0..m {
+        input! {
+            a: usize,
+            b: usize,
+        }
+        graph.entry(a).or_insert(Vec::new()).push(b);
+        graph.entry(b).or_insert(Vec::new()).push(a);
     }
 
     let depth1 = bfs(&graph, 1);
