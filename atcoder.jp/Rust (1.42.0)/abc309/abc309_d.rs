@@ -1,7 +1,7 @@
 use proconio::{fastout, input};
-use std::collections::{HashMap, VecDeque};
+use std::collections::{HashMap, VecDeque, HashSet};
 
-fn bfs<T>(graph: &HashMap<T, Vec<T>>, start: T) -> HashMap<T, usize>
+fn bfs<T>(graph: &HashMap<T, HashSet<T>>, start: T) -> HashMap<T, usize>
 where
     T: Eq + std::hash::Hash + Copy,
 {
@@ -31,8 +31,8 @@ fn main() {
 
     let mut graph = HashMap::new();
     for (a, b) in ab {
-        graph.entry(a).or_insert(Vec::new()).push(b);
-        graph.entry(b).or_insert(Vec::new()).push(a);
+        graph.entry(a).or_insert(HashSet::new()).insert(b);
+        graph.entry(b).or_insert(HashSet::new()).insert(a);
     }
 
     let depth1 = bfs(&graph, 1);
