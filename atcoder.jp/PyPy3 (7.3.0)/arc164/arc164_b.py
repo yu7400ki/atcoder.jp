@@ -7,29 +7,31 @@ for _ in range(M):
     a, b = map(int, input().split())
     connect[a-1].append(b-1)
     connect[b-1].append(a-1)
-
 surface = list(map(int, input().split()))
 
-def dfs(now, visited, visited_all = [False] * N):
-    if visited[now]:
+def dfs(now, visited = None, visited_all = set()):
+    visited = visited or set()
+    if now in visited:
         return True
-    visited[now] = True
-    if visited_all[now]:
+    visited.add(now)
+    if now in visited_all:
         return False
-    visited_all[now] = True
+    visited_all.add(now)
 
     ret = False
     for next in connect[now]:
-        if surface[now] != surface[next]:
-            surface[now] = not surface[now]
+        surface[now] = not surface[now]
+        if surface[now] != surface[next] and next not in visited:
             ret |= dfs(next, visited)
-            surface[now] = not surface[now]
-    visited[now] = False
+        elif surface[now] == surface[next] and next in visited:
+            ret |= dfs(next, visited)
+        surface[now] = not surface[now]
+    visited.discard(now)
 
     return ret
 
 for n in range(N):
-    if dfs(n, [False] * N):
+    if dfs(n, set()):
         print("Yes")
         break
 else:
