@@ -20,12 +20,10 @@ def dfs(now, visited = None, visited_all = set()):
 
     ret = False
     for next in connect[now]:
-        surface[now] = not surface[now]
         if surface[now] != surface[next] and next not in visited:
             ret |= dfs(next, visited)
         elif surface[now] == surface[next] and next in visited:
             ret |= dfs(next, visited)
-        surface[now] = not surface[now]
     visited.discard(now)
 
     return ret
