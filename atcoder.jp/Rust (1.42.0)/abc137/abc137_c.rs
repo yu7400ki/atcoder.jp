@@ -1,23 +1,16 @@
 use proconio::{fastout, input};
+use std::collections::HashMap;
 
-fn counter<T>(v: &[T]) -> std::collections::BTreeMap<T, usize>
-where
-    T: std::cmp::Eq + std::hash::Hash + Clone + std::cmp::Ord,
-{
-    v.iter()
-        .fold(std::collections::BTreeMap::new(), |mut map, x| {
-            *map.entry(x.clone()).or_insert(0) += 1;
-            map
-        })
-}
-
-fn combination(n: usize, r: usize) -> usize {
-    let mut res = 1;
-    for i in 0..r {
-        res *= n - i;
-        res /= i + 1;
+fn cmb(n: usize, r: usize) -> usize {
+    if n < r {
+        return 0;
     }
-    res
+    let mut ans = 1;
+    for i in 0..r {
+        ans *= n - i;
+        ans /= i + 1;
+    }
+    ans
 }
 
 #[fastout]
@@ -27,23 +20,21 @@ fn main() {
         s: [String; n],
     }
 
-    let map = s
-        .iter()
-        .map(|s| s.chars().collect::<Vec<_>>())
-        .map(|v| counter(&v))
-        .map(|v| {
-            v.iter()
-                .map(|(&k, &v)| (k, v))
-                .collect::<Vec<(char, usize)>>()
+    let s: Vec<String> = s
+        .into_iter()
+        .map(|s| {
+            let mut s = s.chars().collect::<Vec<char>>();
+            s.sort_by(|a, b| b.cmp(a));
+            s.iter().collect::<String>()
         })
-        .collect::<Vec<_>>();
+        .collect::<Vec<String>>();
 
-    let cnt = counter(&map);
-    let cnt = cnt
-        .values()
-        .filter(|&&v| v >= 2)
-        .map(|&v| combination(v, 2))
-        .sum::<usize>();
+    let count = s.iter().fold(HashMap::new(), |mut c, p| {
+        *c.entry(p).or_insert(0) += 1;
+        c
+    });
 
-    println!("{:?}", cnt);
+    let ans = count.iter().fold(0, |c, p| c + cmb(*p.1, 2));
+
+    println!("{}", ans);
 }
