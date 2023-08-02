@@ -4,9 +4,6 @@ sys.setrecursionlimit(10**6)
 s = list(input())
 t = list(input())
 
-s = "a" * 3000
-t = "a" * 3000
-
 dp = [[-1] * (len(s) + 1) for _ in range(len(t) + 1)]
 dp[0] = [0] * (len(s) + 1)
 for i in range(len(t) + 1):
