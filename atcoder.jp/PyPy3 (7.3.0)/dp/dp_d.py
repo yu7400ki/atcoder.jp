@@ -12,6 +12,6 @@ for i in range(N):
         w, v = wv[i]
         if j + w > W:
             continue
-        dp[i+1][j+w] = max(dp[i+1][j+w], dp[i+1][j] + v)
+        dp[i+1][j+w] = max(dp[i+1][j+w], dp[i][j] + v)
 
 print(max(dp[N]))
