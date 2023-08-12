@@ -24,10 +24,15 @@ for i in range(Q):
         case _:
             continue
 
-for i in range(len(history)):
-    if history[i][0] > last_operation:
+if last_operation is None:
+    for i, x, c in history:
+        S[x-1] = c
+    print("".join(S))
+    exit()
+
+for i, x, c in history:
+    if i > last_operation:
         break
-    x, c = history[i][1:]
     S[x-1] = c
 
 if is_upper:
@@ -35,10 +40,9 @@ if is_upper:
 elif is_lower:
     S = list(map(lambda x: x.lower(), S))
 
-for i in range(len(history)):
-    if history[i][0] < last_operation:
+for i, x, c in history:
+    if i < last_operation:
         continue
-    x, c = history[i][1:]
     S[x-1] = c
 
 print("".join(S))
