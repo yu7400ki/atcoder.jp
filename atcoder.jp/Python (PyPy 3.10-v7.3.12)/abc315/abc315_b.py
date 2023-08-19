@@ -9,6 +9,6 @@ d_mid = ceil(d_sum, 2)
 
 for i, d in enumerate(D):
     d_sum -= d
-    if d_sum <= d_mid:
+    if d_sum < d_mid:
         print(i + 1, d - d_mid + d_sum + 1)
         break
