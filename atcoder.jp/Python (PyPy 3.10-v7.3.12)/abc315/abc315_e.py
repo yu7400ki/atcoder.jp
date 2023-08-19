@@ -26,6 +26,7 @@ def bfs(graph, n):
     return depth
 
 depth = bfs(graph, 1)
-ans = [k for k, v in depth.items() if v >= 1]
+depth = sorted(depth.items(), key=lambda x: x[1], reverse=True)
+ans = [k for k, v in depth if v >= 1]
 
-print(" ".join(map(str, sorted(ans))))
+print(" ".join(map(str, ans)))
