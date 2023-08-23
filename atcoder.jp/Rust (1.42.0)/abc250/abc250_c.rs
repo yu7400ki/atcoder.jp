@@ -7,6 +7,7 @@ fn main() {
         q: usize,
     }
 
+    let mut idx = (0..n).collect::<Vec<usize>>();
     let mut ans = (0..n).collect::<Vec<usize>>();
 
     for _ in 0..q {
@@ -14,12 +15,13 @@ fn main() {
             x: Usize1,
         }
 
-        let p = ans[x];
-        if p != n - 1 {
-            ans.swap(p, p + 1);
-        } else {
-            ans.swap(p, p - 1);
+        let mut i = idx[x];
+        if i == n - 1 {
+            i -= 1;
         }
+
+        idx.swap(ans[i], ans[i + 1]);
+        ans.swap(i, i + 1);
     }
 
     let ans = ans
