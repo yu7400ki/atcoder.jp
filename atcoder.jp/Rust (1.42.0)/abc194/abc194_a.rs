@@ -8,9 +8,9 @@ fn main() {
     }
 
     let c = a + b;
-    let ans = if c >= 15 && a >= 8 {
+    let ans = if c >= 15 && b >= 8 {
         1
-    } else if c >= 10 && a >= 3 {
+    } else if c >= 10 && b >= 3 {
         2
     } else if c >= 3 {
         3
