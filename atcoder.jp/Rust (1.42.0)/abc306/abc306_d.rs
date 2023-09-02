@@ -1,5 +1,29 @@
 use proconio::{fastout, input};
 
+macro_rules! chmax {
+    ($base:expr, $($cmps:expr),+ $(,)*) => {{
+        let cmp_max = max!($($cmps),+);
+        if $base < cmp_max {
+            $base = cmp_max;
+            true
+        } else {
+            false
+        }
+    }};
+}
+
+macro_rules! max {
+    ($a:expr $(,)*) => {{
+        $a
+    }};
+    ($a:expr, $b:expr $(,)*) => {{
+        std::cmp::max($a, $b)
+    }};
+    ($a:expr, $($rest:expr),+ $(,)*) => {{
+        std::cmp::max($a, max!($($rest),+))
+    }};
+}
+
 #[fastout]
 fn main() {
     input! {
@@ -21,12 +45,12 @@ fn main() {
             match x {
                 0 => {
                     let idx = if j > 0 { j - 1 } else { j };
-                    dp[i + 1][idx] = dp[i + 1][idx].max(dp[i][j] + y);
-                    dp[i + 1][j] = dp[i + 1][j].max(dp[i][j])
+                    chmax!(dp[i + 1][idx], dp[i][j] + y);
+                    chmax!(dp[i + 1][j], dp[i][j]);
                 }
                 1 => {
-                    dp[i + 1][j + 1] = dp[i + 1][j + 1].max(dp[i][j] + y);
-                    dp[i + 1][j] = dp[i + 1][j].max(dp[i][j]);
+                    chmax!(dp[i + 1][j + 1], dp[i][j] + y);
+                    chmax!(dp[i + 1][j], dp[i][j]);
                 }
                 _ => unreachable!(),
             }
