@@ -29,7 +29,7 @@ fn main() {
                     i: Usize1,
                     x: usize,
                 }
-                a.insert(i, a.get(&i).unwrap_or(&0) + x);
+                *a.entry(i).or_insert(0) += x;
             }
             3 => {
                 input! {
