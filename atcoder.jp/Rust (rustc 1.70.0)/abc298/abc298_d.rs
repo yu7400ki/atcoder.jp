@@ -1,4 +1,4 @@
-use ac_library::ModInt998244353;
+use ac_library::ModInt998244353 as MInt;
 use proconio::{fastout, input};
 use std::collections::VecDeque;
 
@@ -8,7 +8,7 @@ fn main() {
         q: usize,
     }
 
-    let mut ans = ModInt998244353::new(1);
+    let mut ans = MInt::new(1);
     let mut s = VecDeque::new();
     s.push_back(1);
 
@@ -26,7 +26,7 @@ fn main() {
                 ans = ans * 10 + x;
             }
             2 => {
-                ans -= 10_i32.pow(s.len() as u32 - 1) * s.front().unwrap();
+                ans -= MInt::new(10).pow(s.len() as u64 - 1) * *s.front().unwrap();
                 s.pop_front();
             }
             3 => {
