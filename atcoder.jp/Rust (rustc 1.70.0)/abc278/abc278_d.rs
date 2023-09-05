@@ -1,13 +1,15 @@
-use proconio::{fastout, input};
+use proconio::{fastout, input, marker::Usize1};
+use std::collections::HashMap;
 
 #[fastout]
 fn main() {
     input! {
         n: usize,
-        mut a: [usize; n],
+        a: [usize; n],
         q: usize,
     }
 
+    let mut a = a.into_iter().enumerate().collect::<HashMap<_, _>>();
     let mut v = 0;
 
     for _ in 0..q {
@@ -20,20 +22,20 @@ fn main() {
                     x: usize,
                 }
                 v = x;
-                a = vec![0; n];
+                a.clear();
             }
             2 => {
                 input! {
-                    i: usize,
+                    i: Usize1,
                     x: usize,
                 }
-                a[i - 1] += x;
+                a.insert(i, a.get(&i).unwrap_or(&0) + x);
             }
             3 => {
                 input! {
-                    i: usize,
+                    i: Usize1,
                 }
-                println!("{}", a[i - 1] + v);
+                println!("{}", a.get(&i).unwrap_or(&0) + v);
             }
             _ => unreachable!(),
         }
