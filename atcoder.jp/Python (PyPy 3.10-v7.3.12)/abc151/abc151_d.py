@@ -1,6 +1,6 @@
 H, W = map(int, input().split())
 S = [list(input()) for _ in range(H)]
-INF = 1 << 60
+INF = float("inf")
 
 def grid_to_graph(grid, wall="#"):
     H, W = len(grid), len(grid[0])
