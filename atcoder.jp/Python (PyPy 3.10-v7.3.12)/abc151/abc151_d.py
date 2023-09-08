@@ -1,6 +1,8 @@
+import numpy as np
+
 H, W = map(int, input().split())
 S = [list(input()) for _ in range(H)]
-INF = float("inf")
+INF = np.inf
 
 def grid_to_graph(grid, wall="#"):
     H, W = len(grid), len(grid[0])
