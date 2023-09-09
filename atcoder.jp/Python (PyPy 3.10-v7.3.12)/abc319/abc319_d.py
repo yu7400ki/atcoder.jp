@@ -3,7 +3,7 @@ L = list(map(int, input().split()))
 
 width = max(sum(L) // M, max(L))
 ng = width - 1
-ok = width + 1000
+ok = width + 10 ** 9
 
 while ok - ng > 1:
     width = (ok + ng) // 2
