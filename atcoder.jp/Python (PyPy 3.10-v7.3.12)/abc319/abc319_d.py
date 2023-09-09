@@ -1,9 +1,12 @@
 N, M = map(int, input().split())
 L = list(map(int, input().split()))
 
-width = sum(L) // M
+width = max(sum(L) // M, max(L))
+ng = width - 1
+ok = width + 1000
 
-while True:
+while ok - ng > 1:
+    width = (ok + ng) // 2
     row = 0
     col = 1
     for l in L:
@@ -15,9 +18,9 @@ while True:
         else:
             row = l + 1
             col += 1
-    if col == M:
-        break
+    if col <= M:
+        ok = width
     else:
-        width += 1
+        ng = width
 
-print(width)
+print(ok)
