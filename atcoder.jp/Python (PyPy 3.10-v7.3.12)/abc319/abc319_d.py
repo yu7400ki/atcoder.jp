@@ -15,7 +15,7 @@ while True:
         else:
             row = l + 1
             col += 1
-    if col <= M:
+    if col == M:
         break
     else:
         width += 1
