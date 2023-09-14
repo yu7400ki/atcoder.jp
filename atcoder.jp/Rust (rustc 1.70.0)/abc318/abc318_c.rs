@@ -1,5 +1,6 @@
 use proconio::{input, fastout};
 
+#[inline]
 fn ceil(a: usize, b: usize) -> usize {
     (a + b - 1) / b
 }
