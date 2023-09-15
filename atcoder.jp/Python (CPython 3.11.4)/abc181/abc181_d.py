@@ -2,7 +2,7 @@ from collections import Counter
 
 S = input()
 
-if len(S) < 2:
+if len(S) <= 2:
     if int(S) % 8 == 0:
         print("Yes")
     else:
