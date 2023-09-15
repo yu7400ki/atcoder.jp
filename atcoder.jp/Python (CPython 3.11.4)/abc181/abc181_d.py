@@ -2,8 +2,13 @@ from collections import Counter
 
 S = input()
 
-if len(S) <= 2:
+if len(S) == 1:
     if int(S) % 8 == 0:
+        print("Yes")
+    else:
+        print("No")
+elif len(S) == 2:
+    if int(S) % 8 == 0 or int(S[1] + S[0]) % 2 == 0:
         print("Yes")
     else:
         print("No")
