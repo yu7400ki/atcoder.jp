@@ -1,15 +1,20 @@
 from collections import Counter
 
-S = Counter(list(input().zfill(3)))
+S = input()
 
-for i in range(1000):
-    if i % 8 != 0:
-        continue
-    for k, v in Counter(list(str(i).zfill(3))).items():
-        if S[k] < v:
+if len(S) < 2:
+    if int(S) % 8 == 0:
+        print("Yes")
+    else:
+        print("No")
+else:
+    S = Counter(list(S))
+    for i in range(0, 1000, 8):
+        for k, v in Counter(list(str(i).zfill(3))).items():
+            if S[k] < v:
+                break
+        else:
+            print("Yes")
             break
     else:
-        print("Yes")
-        break
-else:
-    print("No")
+        print("No")
