@@ -8,7 +8,7 @@ if len(S) == 1:
     else:
         print("No")
 elif len(S) == 2:
-    if int(S) % 8 == 0 or int(S[1] + S[0]) % 2 == 0:
+    if int(S) % 8 == 0 or int(S[1] + S[0]) % 8 == 0:
         print("Yes")
     else:
         print("No")
