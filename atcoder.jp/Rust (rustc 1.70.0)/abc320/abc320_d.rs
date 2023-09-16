@@ -1,3 +1,4 @@
+use pathfinding::prelude::directions::S;
 use proconio::{input, fastout, marker::Usize1};
 
 #[fastout]
@@ -26,19 +27,20 @@ fn main() {
     let mut dist = vec![-1; n];
     let mut nodes = vec![vec![0; 0]; n];
     dist[0] = 0;
-    nodes[0].push(0);
+    nodes[0] = vec![0];
     let mut ans = vec![None; n];
     ans[0] = Some((0, 0));
 
     for k in 1..n {
         let mut new_nodes = vec![0; 0];
         for v in nodes[k - 1].iter() {
-            for next_v in edges[*v].iter() {
-                if dist[*next_v] == -1 {
-                    dist[*next_v] = dist[*v] + 1;
-                    new_nodes.push(*next_v);
-                    let (x, y) = points[*v][*next_v].unwrap();
-                    ans[*next_v] = Some((ans[*v].unwrap().0 + x, ans[*v].unwrap().1 + y));
+            for u in edges[*v].iter() {
+                if dist[*u] == -1 {
+                    dist[*u] = dist[*v] + 1;
+                    new_nodes.push(*u);
+                    let (dx, dy) = points[*v][*u].unwrap_or((0, 0));
+                    let (x, y) = ans[*v].unwrap_or((0, 0));
+                    ans[*u] = Some((x + dx, y + dy));
                 }
             }
         }
