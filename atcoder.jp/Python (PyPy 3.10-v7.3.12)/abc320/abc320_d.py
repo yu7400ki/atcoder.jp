@@ -16,21 +16,22 @@ for _ in range(M):
     points[B][A] = (-X, -Y)
 
 def bfs(graph: defaultdict, n) -> defaultdict:
-    depth = defaultdict(lambda: -1)
-    depth[n] = 0
+    # depth = defaultdict(lambda: -1)
+    # depth[n] = 0
+    visited = [False] * N
     ans[n] = (0, 0)
     queue = deque()
     queue.append(n)
 
     while queue:
         u = queue.popleft()
+        if visited[u]:
+            continue
+        visited[u] = True
         for v in graph[u]:
-            if depth[v] == -1:
+            if ans[v] is None:
                 queue.append(v)
-                depth[v] = depth[u] + 1
                 ans[v] = (ans[u][0] + points[u][v][0], ans[u][1] + points[u][v][1])
-
-    return depth
 
 bfs(graph, 0)
 
