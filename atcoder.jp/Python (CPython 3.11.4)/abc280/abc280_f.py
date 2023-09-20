@@ -56,7 +56,7 @@ for _ in range(M):
     B -= 1
     if not uf.same(A, B):
         uf.union(A, B, C)
-    if uf.diff(A, B) != C:
+    elif uf.diff(A, B) != C:
         is_inf[uf.find(A)] = True
 
 for _ in range(Q):
