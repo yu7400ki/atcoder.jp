@@ -54,7 +54,8 @@ for _ in range(M):
     A, B, C = map(int, input().split())
     A -= 1
     B -= 1
-    uf.union(A, B, C)
+    if not uf.same(A, B):
+        uf.union(A, B, C)
     if uf.diff(A, B) != C:
         is_inf[uf.find(A)] = True
 
@@ -64,9 +65,7 @@ for _ in range(Q):
     Y -= 1
     if not uf.same(X, Y):
         print("nan")
+    elif is_inf[uf.find(X)]:
+        print("inf")
     else:
-        par = uf.find(X)
-        if is_inf[par]:
-            print("inf")
-        else:
-            print(uf.diff(X, Y))
+        print(uf.diff(X, Y))
