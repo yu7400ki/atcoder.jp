@@ -1,16 +1,17 @@
 class PotentialUnionFind:
     def __init__(self, n: int):
-        self.parents = [-1] * n
+        self.parents = list(range(n))
         self.rank = [0] * n
         self.siz = [1] * n
         self.dif = [0] * n
 
     def find(self, x: int) -> int:
-        if self.parents[x] == -1:
+        if self.parents[x] == x:
             return x
         else:
-            self.parents[x] = self.find(self.parents[x])
+            root = self.find(self.parents[x])
             self.dif[x] += self.dif[self.parents[x]]
+            self.parents[x] = root
             return self.parents[x]
 
     def weight(self, x: int) -> int:
@@ -44,7 +45,7 @@ class PotentialUnionFind:
         return self.siz[self.find(x)]
 
     def groups(self):
-        return {x: self.siz[x] for x in self.parents if self.parents[x] == -1}
+        return {x: self.siz[x] for x in self.parents if self.parents[x] == x}
 
 
 N, M, Q = map(int, input().split())
