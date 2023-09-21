@@ -10,9 +10,13 @@ for i in range(N):
     B[i] = b
 
 wield = max(A)
+s = 0
 throw = []
 for b in B:
+    if s >= H:
+        break
     if b > wield:
+        s += b
         throw.append(b)
 
 ans = len(throw)
