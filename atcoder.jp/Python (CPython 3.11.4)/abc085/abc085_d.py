@@ -8,6 +8,7 @@ for i in range(N):
     a, b = map(int, input().split())
     A[i] = a
     B[i] = b
+B.sort()
 
 wield = max(A)
 s = 0
