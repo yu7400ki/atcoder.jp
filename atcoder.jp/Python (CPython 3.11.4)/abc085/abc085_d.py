@@ -22,6 +22,8 @@ for b in B:
 ans = len(throw)
 s = sum(throw)
 H -= s
-ans += ceil(H, wield)
+
+if H > 0:
+    ans += ceil(H, wield)
 
 print(ans)
