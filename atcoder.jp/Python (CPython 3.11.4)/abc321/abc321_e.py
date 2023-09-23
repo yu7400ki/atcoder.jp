@@ -1,12 +1,13 @@
 def search(n, x, k):
     if k < 0:
         return 0
+    if len(bin(x)[2:]) + len(bin(k)[2:]) > len(bin(n)[2:]):
+        return 0
     left = x << k
-    right = left + (1 << k) - 1
     if left > n:
         return 0
-    else:
-        return min(n, right) - left + 1
+    right = left + (1 << k) - 1
+    return min(n, right) - left + 1
 
 
 def solve():
