@@ -13,7 +13,7 @@ def solve():
     N, X, K = map(int, input().split())
     ans = search(N, X, K)
     parent = X
-    while parent != 1 and K > 0:
+    while parent > 1 and K > 0:
         opposite = parent ^ 1
         parent = parent >> 1
         K -= 1
