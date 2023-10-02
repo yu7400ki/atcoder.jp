@@ -16,17 +16,21 @@ for y in range(N):
     for x in range(N):
         acc[y + 1][x + 1] = acc[y][x + 1] + acc[y + 1][x] - acc[y][x] + D[y][x]
 
-Q = int(input())
-for _ in range(Q):
-    P = int(input())
-    div = divisors(P)
-    ans = -1
+ans = [-1] * (N**2 + 1)
+ma = -1
+for p in range(1, N**2 + 1):
+    div = divisors(p)
     for d in div:
-        e = P // d
+        e = p // d
         d = min(d, N)
         e = min(e, N)
         for y in range(1 + d - 1, N + 1):
             for x in range(1 + e - 1, N + 1):
                 tmp = acc[y][x] - acc[y - d][x] - acc[y][x - e] + acc[y - d][x - e]
-                ans = max(ans, tmp)
-    print(ans)
+                ma = max(ma, tmp)
+    ans[p - 1] = ma
+
+Q = int(input())
+for _ in range(Q):
+    P = int(input())
+    print(ans[P - 1])
