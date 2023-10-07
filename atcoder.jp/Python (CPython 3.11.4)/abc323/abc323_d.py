@@ -14,9 +14,8 @@ for _ in range(N):
     s, c = map(int, input().split())
     slime[s] = c
 
-sorted_slime = sorted(slime.items(), key=lambda x: x[0], reverse=True)
 new_slime = defaultdict(int)
-for s, c in sorted_slime:
+for s, c in slime.items():
     i = 0
     while s & 1 == 0:
         s >>= 1
