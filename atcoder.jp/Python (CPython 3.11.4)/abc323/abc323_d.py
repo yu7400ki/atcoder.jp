@@ -1,11 +1,3 @@
-def count_one(n):
-    c = 0
-    while n > 0:
-        if n & 1:
-            c += 1
-        n >>= 1
-    return c
-
 from collections import defaultdict
 
 N = int(input())
@@ -15,7 +7,7 @@ for _ in range(N):
     slime[s] = c
 
 new_slime = defaultdict(int)
-for s, c in slime.items():
+for s, c in slime:
     i = 0
     while s & 1 == 0:
         s >>= 1
@@ -24,6 +16,6 @@ for s, c in slime.items():
 
 ans = 0
 for c in new_slime.values():
-    ans += count_one(c)
+    ans += c.bit_count()
 
 print(ans)
