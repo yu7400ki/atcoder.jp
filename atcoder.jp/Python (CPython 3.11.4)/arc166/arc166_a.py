@@ -2,31 +2,51 @@ def solve(N: int, X: str, Y: str):
     for x, y in zip(X, Y):
         if y == "C" and x != "C":
             return "No"
-    Y: list[str] = Y.split("C")
-    l = 0
-    for y in Y:
-        r = l + len(y)
-        if l == r:
-            l = r + 1
-            continue
-        ya_idx = []
-        xa_idx = []
-        for i in range(len(y)):
-            if y[i] == "A":
-                ya_idx.append(i)
-            if X[l + i] == "A":
-                xa_idx.append(i)
-        for i in range(l, r):
-            if len(ya_idx) <= len(xa_idx):
-                break
-            if X[i] == "C":
-                xa_idx.append(i - l)
-        if len(xa_idx) != len(ya_idx):
-            return "No"
-        if len(ya_idx) != 0 and (ya_idx[-1] < max(xa_idx) or ya_idx[0] < min(xa_idx)):
-            return "No"
-        l = r + 1
-    return "Yes"
+    XC = []
+    YC = []
+    tmp_x = []
+    tmp_y = []
+    for x, y in zip(X, Y):
+        if y == "C":
+            if tmp_y:
+                XC.append(tmp_x)
+                YC.append(tmp_y)
+                tmp_x = []
+                tmp_y = []
+        else:
+            tmp_x.append(x)
+            tmp_y.append(y)
+    if tmp_y:
+        XC.append(tmp_x)
+        YC.append(tmp_y)
+    if all(solve2(x, y) for x, y in zip(XC, YC)):
+        return "Yes"
+    else:
+        return "No"
+
+
+def solve2(x: list[str], y: list[str]) -> bool:
+    assert len(x) == len(y)
+    xa_cnt = x.count("A")
+    ya_cnt = y.count("A")
+    remain = ya_cnt - xa_cnt
+    if remain < 0:
+        return False
+    for i in range(len(x)):
+        if remain > 0 and x[i] == "C":
+            x[i] = "A"
+            remain -= 1
+        elif x[i] == "C":
+            x[i] = "B"
+    acc_x = [0] * (len(x) + 1)
+    acc_y = [0] * (len(y) + 1)
+    for i in range(len(x)):
+        acc_x[i + 1] = acc_x[i] + (x[i] == "A")
+        acc_y[i + 1] = acc_y[i] + (y[i] == "A")
+    for a, b in zip(acc_x, acc_y):
+        if b > a:
+            return False
+    return True
 
 
 T = int(input())
