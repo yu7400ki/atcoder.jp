@@ -21,7 +21,9 @@ def solve(N: int, X: str, Y: str):
                 break
             if X[i] == "C":
                 xa_idx.append(i - l)
-        if len(xa_idx) != len(ya_idx) or len(ya_idx) != 0 and ya_idx[-1] < max(xa_idx):
+        if len(xa_idx) != len(ya_idx):
+            return "No"
+        if len(ya_idx) != 0 and (ya_idx[-1] < max(xa_idx) or ya_idx[0] < min(xa_idx)):
             return "No"
         l = r + 1
     return "Yes"
