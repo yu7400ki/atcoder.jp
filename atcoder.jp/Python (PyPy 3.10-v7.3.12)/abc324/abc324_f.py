@@ -39,8 +39,13 @@ inf = 1 << 60
 ans = [(inf, 0) for _ in range(N + 1)]
 ans[1] = (0, 0)
 
+ok = {1}
+
 for u in res:
+    if u not in ok:
+        continue
     for v in graph[u]:
+        ok.add(v)
         new = (ans[u][0] + cost[(u, v)], ans[u][1] + beautiful[(u, v)])
         ans[v] = max(
             ans[v],
