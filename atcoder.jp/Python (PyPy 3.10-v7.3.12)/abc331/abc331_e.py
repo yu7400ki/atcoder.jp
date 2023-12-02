@@ -11,8 +11,8 @@ for _ in range(L):
     d -= 1
     pair[c].add(d)
 
-a_sorted = sorted(enumerate(a), key=lambda x: x[1])
-b_sorted = sorted(enumerate(b), key=lambda x: x[1])
+a_sorted = sorted(enumerate(a), key=lambda x: x[1], reverse=True)
+b_sorted = sorted(enumerate(b), key=lambda x: x[1], reverse=True)
 
 ans = -1
 for i, a in a_sorted:
@@ -21,5 +21,6 @@ for i, a in a_sorted:
             continue
         else:
             ans = max(ans, a + b)
+            break
 
 print(ans)
