@@ -2,14 +2,19 @@ from collections import defaultdict
 from heapq import heappop, heappush
 
 N = int(input())
+A = []
+B = []
+X = []
 
 g = defaultdict(list)
 
 for i in range(N - 1):
     a, b, x = map(int, input().split())
     x -= 1
-    g[i].append([i + 1, a])
-    g[i].append([x, b])
+    A.append(a)
+    B.append(b)
+    X.append(x)
+    g[i].append(x)
 
 inf = 1 << 60
 
@@ -17,12 +22,18 @@ q = [(0, 0)]
 d = [inf] * N
 d[0] = 0
 while q:
-    u, dist = heappop(q)
+    dist, u = heappop(q)
     if d[u] < dist:
         continue
     for v in g[u]:
-        if d[v[0]] > d[u] + v[1]:
-            d[v[0]] = d[u] + v[1]
-            heappush(q, (v[0], d[v[0]]))
+        if d[v] > d[u] + B[u]:
+            d[v] = d[u] + B[u]
+            heappush(q, (d[v], v))
+    v = u + 1
+    if v >= N:
+        continue
+    if d[v] > d[u] + A[u]:
+        d[v] = d[u] + A[u]
+        heappush(q, (d[v], v))
 
 print(d[N - 1])
