@@ -1,38 +1,28 @@
-from collections import defaultdict, deque
+from collections import defaultdict
+from heapq import heappop, heappush
 
 N = int(input())
 
-A = []
-B = []
-X = []
 g = defaultdict(list)
 
 for i in range(N - 1):
     a, b, x = map(int, input().split())
     x -= 1
-    A.append(a)
-    B.append(b)
-    X.append(x)
-    g[x].append(i)
-
-acc = [0] * N
-for i in range(N - 1):
-    acc[i + 1] = acc[i] + A[i]
+    g[i].append([i + 1, a])
+    g[i].append([x, b])
 
 inf = 1 << 60
 
-q = deque([N - 1])
-d = defaultdict(lambda: inf)
-d[N - 1] = 0
+q = [(0, 0)]
+d = [inf] * N
+d[0] = 0
 while q:
-    u = q.popleft()
+    u, dist = heappop(q)
+    if d[u] < dist:
+        continue
     for v in g[u]:
-        if d[v] == inf:
-            q.append(v)
-            d[v] = min(d[v], d[u] + B[v])
+        if d[v[0]] > d[u] + v[1]:
+            d[v[0]] = d[u] + v[1]
+            heappush(q, (v[0], d[v[0]]))
 
-ans = float(inf)
-for i in range(N):
-    ans = min(ans, acc[i] + d[i])
-
-print(ans)
+print(d[N - 1])
