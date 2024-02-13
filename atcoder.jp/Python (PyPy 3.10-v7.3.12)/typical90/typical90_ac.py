@@ -1,15 +1,8 @@
 from atcoder.lazysegtree import LazySegTree
 
-def op(x, y):
-    return max(x, y)
-def mapping(f, x):
-    if f == -1:
-        return x
-    return f
-def composition(f, g):
-    if f == -1:
-        return g
-    return f
+op = max
+mapping = lambda f, x: f if f != -1 else x
+composition = lambda f, g: f if f != -1 else g
 e = -1
 _id = -1
 
