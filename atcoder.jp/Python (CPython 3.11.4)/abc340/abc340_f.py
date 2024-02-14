@@ -14,5 +14,5 @@ g = gcd(X, Y)
 if g >= 3:
     print(-1)
 else:
-    x, y = ext_gcd(X, -Y)
-    print(2 // g * x, 2 // g * y)
+    c, d = ext_gcd(Y, -X)
+    print(2 // g * c, 2 // g * d)
