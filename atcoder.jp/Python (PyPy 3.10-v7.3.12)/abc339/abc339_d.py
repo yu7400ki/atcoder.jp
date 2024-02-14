@@ -1,4 +1,5 @@
 from collections import defaultdict, deque
+from functools import cache
 
 
 class DefaultDict(defaultdict):
@@ -26,9 +27,12 @@ def bfs(graph: defaultdict, n) -> defaultdict:
     return depth
 
 
+@cache
 def default_factory(key):
     ret = []
     y1, x1, y2, x2 = key
+    if (y1, x1) == (y2, x2):
+        return ret
     for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
         ny1, nx1 = y1 + dy, x1 + dx
         ny2, nx2 = y2 + dy, x2 + dx
