@@ -5,7 +5,7 @@ A = list(map(int, input().split()))
 
 op = max
 e = 0
-seg = SegTree(op, e, 10 ** 6)
+seg = SegTree(op, e, 10 ** 6 + 10)
 
 for a in A:
     l = max(0, a - D)
