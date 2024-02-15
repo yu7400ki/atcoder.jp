@@ -1,1 +1,3 @@
-print("L" + int(input()) * "o" + "ng")
+N = int(input())
+
+print("L" + "o" * N + "ng")
