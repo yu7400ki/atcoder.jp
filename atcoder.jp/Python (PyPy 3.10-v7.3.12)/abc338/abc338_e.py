@@ -1,26 +1,25 @@
 N = int(input())
 l = []
-r = []
+pair = {}
 for _ in range(N):
-    a, b = map(int, input().split())
-    l.append(min(a, b))
-    r.append(max(a, b))
-
-h = l + r
-h.sort(reverse=True)
-r = {x: y for x, y in zip(r, l)}
-l = set(l)
+    A, B = map(int, input().split())
+    a, b = min(A, B), max(A, B)
+    l.append(a)
+    l.append(b)
+    pair[b] = a
+l.sort()
 
 stack = []
-while h:
-    x = h.pop()
-    if x in l:
-        stack.append(x)
+for i in range(N * 2):
+    if not stack:
+        stack.append(l[i])
     else:
-        if stack and stack[-1] == r[x]:
+        if stack[-1] == pair.get(l[i]):
             stack.pop()
         else:
-            print("Yes")
-            break
+            stack.append(l[i])
+
+if stack:
+    print("Yes")
 else:
     print("No")
