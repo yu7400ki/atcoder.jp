@@ -1,8 +1,8 @@
 N = int(input())
 
-i = 0
-while N & 1 == 0:
+ans = 0
+while ~N & 1:
     N >>= 1
-    i += 1
+    ans += 1
 
-print(i)
+print(ans)
