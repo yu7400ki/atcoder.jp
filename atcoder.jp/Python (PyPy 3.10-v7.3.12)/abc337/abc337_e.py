@@ -1,6 +1,6 @@
 N = int(input())
 
-M = len(bin(N)) - 2
+M = len(bin(N - 1)) - 2
 print(M)
 
 for i in range(M):
