@@ -5,7 +5,7 @@ B = list(map(int, input().split()))
 
 inf = 1 << 60
 ans = 0
-for i in range(10**6):
+for i in range(10**6 + 1):
     rest = [q - a * i for q, a in zip(Q, A)]
     if any([r < 0 for r in rest]):
         break
