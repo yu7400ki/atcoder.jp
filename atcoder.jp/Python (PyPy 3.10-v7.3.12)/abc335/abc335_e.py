@@ -16,16 +16,14 @@ for _ in range(M):
             u, v = v, u
         g[u].append(v)
 
-dp = [-1] * N
-dp[0] = 1
+dp = [0] * N
+dp[uf.leader(0)] = 1
 for i in sorted(range(N), key=lambda x: A[x]):
     u = uf.leader(i)
-    if dp[u] == -1:
+    if dp[u] == 0:
         continue
     for j in g[u]:
         v = uf.leader(j)
-        if u == v:
-            continue
         dp[v] = max(dp[v], dp[u] + 1)
 
-print(max(dp[N - 1], 0))
+print(dp[uf.leader(N - 1)])
