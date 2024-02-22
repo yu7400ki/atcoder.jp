@@ -22,7 +22,7 @@ for i in sorted(range(N), key=lambda x: A[x]):
     u = uf.leader(i)
     if dp[u] == -1:
         continue
-    for j in g[i]:
+    for j in g[u]:
         v = uf.leader(j)
         if u == v:
             continue
