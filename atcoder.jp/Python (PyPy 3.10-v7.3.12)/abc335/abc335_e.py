@@ -22,7 +22,7 @@ for i in sorted(range(N), key=lambda x: A[x]):
     u = uf.leader(i)
     if dp[u] == 0:
         continue
-    for j in g[u]:
+    for j in g[i]:
         v = uf.leader(j)
         dp[v] = max(dp[v], dp[u] + 1)
 
