@@ -1,17 +1,15 @@
-from collections import deque
-
 N, Q = map(int, input().split())
 
-parts = [(i + 1, 0) for i in range(N)]
-parts = deque(parts, N)
+l = [(i + 1, 0) for i in range(N)]
+l.reverse()
 
+d = {"R": (1, 0), "L": (-1, 0), "U": (0, 1), "D": (0, -1)}
 for _ in range(Q):
-    t, u = input().split()
+    t, c = input().split()
     if t == "1":
-        dx = 1 if u == "R" else -1 if u == "L" else 0
-        dy = 1 if u == "U" else -1 if u == "D" else 0
-        head = parts[0]
-        parts.appendleft((head[0] + dx, head[1] + dy))
+        dx, dy = d[c]
+        nx, ny = l[-1][0] + dx, l[-1][1] + dy
+        l.append((nx, ny))
     else:
-        u = int(u) - 1
-        print(parts[u][0], parts[u][1])
+        p = int(c)
+        print(l[-p][0], l[-p][1])
