@@ -1,1 +1,1 @@
-print(input()[:-1], 4, sep="")
+print(input()[:-1] + "4")
