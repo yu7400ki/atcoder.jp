@@ -4,7 +4,7 @@ c, d = sorted(map(int, input().split()))
 
 if (a, b) == (c, d):
     print(2)
-elif b <= c or d <= a:
-    print(3)
-else:
+elif a < c < b or c < a < d:
     print(4)
+else:
+    print(3)
