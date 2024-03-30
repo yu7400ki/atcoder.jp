@@ -1,33 +1,33 @@
 a, b, C = map(int, input().split())
 c = C.bit_count()
 
-for i in range(c):
+for i in range(c + 1):
     j = c - i
     x = a - i
     y = b - j
     if x == y and x >= 0 and y >= 0:
         k = 1
-        ans_a = 0
-        ans_b = 0
+        X = 0
+        Y = 0
         while i or j or x:
             if C & k:
                 if i:
                     i -= 1
-                    ans_a |= k
+                    X |= k
                 elif j:
                     j -= 1
-                    ans_b |= k
+                    Y |= k
             else:
                 if x:
                     x -= 1
-                    ans_a |= k
-                    ans_b |= k
+                    X |= k
+                    Y |= k
             k <<= 1
-        if ans_a < (1 << 60) and ans_b < (1 << 60):
-            assert ans_a ^ ans_b == C
-            assert ans_a.bit_count() == a
-            assert ans_b.bit_count() == b
-            print(ans_a, ans_b)
+        if X < 1 << 60 and Y < 1 << 60:
+            assert X ^ Y == C
+            assert X.bit_count() == a
+            assert Y.bit_count() == b
+            print(X, Y)
             break
 else:
     print(-1)
