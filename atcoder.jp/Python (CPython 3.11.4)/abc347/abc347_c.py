@@ -8,9 +8,9 @@ ans = 0
 for d, e in zip(D, D[1:]):
     d += ans
     e += ans
-    if (e - d) % w < A:
-        continue
-    else:
+    d % w
+    e % w
+    if (e - d) % w >= A:
         ans = w - e
         if ans >= A:
             print("No")
