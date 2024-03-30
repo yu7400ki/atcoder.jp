@@ -23,11 +23,11 @@ for i in range(c):
                     ans_a |= k
                     ans_b |= k
             k <<= 1
-        if ans_a < 1 << 60 and ans_b < 1 << 60:
-            print(ans_a, ans_b)
+        if ans_a < (1 << 60) and ans_b < (1 << 60):
             assert ans_a ^ ans_b == C
             assert ans_a.bit_count() == a
             assert ans_b.bit_count() == b
+            print(ans_a, ans_b)
             break
 else:
     print(-1)
