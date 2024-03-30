@@ -1,5 +1,3 @@
-import sys
-
 a, b, C = map(int, input().split())
 c = C.bit_count()
 
@@ -25,7 +23,7 @@ for i in range(c):
                     ans_a |= k
                     ans_b |= k
             k <<= 1
-        if ans_a < 1 << 60 or ans_b < 1 << 60:
+        if ans_a < 1 << 60 - 1 or ans_b < 1 << 60 - 1:
             print(ans_a, ans_b)
             assert ans_a ^ ans_b == C
             assert ans_a.bit_count() == a
