@@ -4,15 +4,12 @@ D = [d - D[0] for d in D]
 
 w = A + B
 
-ans = 0
-for d, e in zip(D, D[1:]):
-    d += ans
-    e += ans
-    d % w
-    e % w
-    if (e - d) % w >= A:
-        ans = w - e
-        if ans >= A:
+offset = 0
+for d in D:
+    d %= w
+    if d >= A:
+        offset = w - d
+        if offset >= A:
             print("No")
             break
 else:
