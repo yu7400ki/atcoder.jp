@@ -1,16 +1,18 @@
 N, A, B = map(int, input().split())
 D = list(map(int, input().split()))
-D = [d - D[0] for d in D]
 
 w = A + B
+d = [(d - D[0]) % w for d in D]
 
-offset = 0
-for d in D:
-    d %= w
-    if d >= A:
-        offset = w - d
-        if offset >= A:
-            print("No")
-            break
-else:
+if all(x < A for x in d):
     print("Yes")
+    exit()
+
+rl = min([x % w for x in d if x >= A])
+of = w - rl
+d = [(x + of) % w for x in d]
+
+if all(x < A for x in d):
+    print("Yes")
+else:
+    print("No")
