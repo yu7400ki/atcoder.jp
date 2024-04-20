@@ -11,6 +11,17 @@ def solve(N, A):
 N = int(input())
 A = list(map(int, input().split()))
 
+index_map = {a: i for i, a in enumerate(A)}
+
+def solve(N, A):
+    swaps = []
+    for i in range(N):
+        min_index = index_map[i + 1]
+        if min_index != i:
+            swaps.append((i + 1, min_index + 1))
+            A[i], A[min_index] = A[min_index], A[i]
+    return swaps
+
 swaps = solve(N, A)
 
 print(len(swaps))
