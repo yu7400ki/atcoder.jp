@@ -9,26 +9,23 @@ class Edge(NamedTuple):
 
 
 N, M = map(int, input().split())
-uf = DSU(N)
 edges = []
-
 for _ in range(M):
     K, C = map(int, input().split())
     A = list(map(int, input().split()))
     for a, b in zip(A, A[1:]):
         edges.append(Edge(a - 1, b - 1, C))
-        uf.merge(a - 1, b - 1)
 
-if len(uf.groups()) > 1:
-    ans = -1
+edges.sort(key=lambda x: x.w)
+uf = DSU(N)
+ans = 0
+for e in edges:
+    if uf.same(e.u, e.v):
+        continue
+    uf.merge(e.u, e.v)
+    ans += e.w
+
+if len(uf.groups()) == 1:
+    print(ans)
 else:
-    edges.sort(key=lambda x: x.w)
-    uf = DSU(N)
-    ans = 0
-    for e in edges:
-        if uf.same(e.u, e.v):
-            continue
-        uf.merge(e.u, e.v)
-        ans += e.w
-
-print(ans)
+    print(-1)
